@@ -1,7 +1,4 @@
 import java.io.PrintWriter;
-import java.util.HashMap;
-
-
 /**
  * Sequential Tree Representation implementation for the {@link BSPTree} interface.
  * <p>
@@ -15,7 +12,6 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
     /**
      * Constructs empty graph.
      */
-
     protected Node rootNode;
     protected int size;
 
@@ -73,12 +69,14 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
 
     protected class Node{
         protected T vertLabel;
-        protected Node rightChild, leftChild;
+        protected Node rightChild, leftChild, parent;
+
 
         public Node(T vertLabel) {
             this.vertLabel = vertLabel;
             this.leftChild = null;
             this.rightChild = null;
+            this.parent = null;
         }
 
         public T getVertLabel() {
@@ -103,6 +101,14 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
 
         public void setLeftChild(Node leftChild) {
             this.leftChild = leftChild;
+        }
+
+        public Node getParent() {
+            return parent;
+        }
+
+        public void setParent(Node parent) {
+            this.parent = parent;
         }
 
 
