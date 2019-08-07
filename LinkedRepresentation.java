@@ -20,18 +20,25 @@ public class LinkedRepresentation<T> implements BSPTree<T> {
     protected int size;
 
     public LinkedRepresentation() {
-        rootNode = new Node(nodeLabel);
-        size++;
+        rootNode = null;
+        size = 0;
+
     } // end of LinkedRepresentation()
 
     @Override
     public void setRootNode(T nodeLabel) {
-        // Implement me!
+        rootNode = new Node(nodeLabel);
+        size++;
     } // end of setRootNode()
 
     @Override
     public void splitNode(T srcLabel, T leftChild, T rightChild) {
-        // Implement me!
+        Node node = new Node(srcLabel);
+        if (findNode(srcLabel)) {
+            node.setLeftChild(new Node(leftChild));
+            node.setRightChild(new Node(rightChild));
+            size = size+2;
+        }
     } // end of splitNode
 
     @Override
