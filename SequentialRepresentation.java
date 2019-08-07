@@ -12,19 +12,13 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
     /**
      * Constructs empty graph.
      */
-    protected Node rootNode;
-    protected int size;
 
     public SequentialRepresentation() {
         // Implement me!
-        rootNode = null;
-        size = 0;
     } // end of SequentialRepresentation()
 
     @Override
     public void setRootNode(T nodeLabel) {
-        rootNode = new Node(nodeLabel);
-        size++;
 
     } // end of setRootNode()
 
@@ -65,55 +59,6 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
     public void printInPostorder(PrintWriter writer) {
         // Implement me!
     } // end of printInPostorder
-
-
-    protected class Node{
-        protected T vertLabel;
-        protected Node rightChild, leftChild, parent;
-
-
-        public Node(T vertLabel) {
-            this.vertLabel = vertLabel;
-            this.leftChild = null;
-            this.rightChild = null;
-            this.parent = null;
-        }
-
-        public T getVertLabel() {
-            return vertLabel;
-        }
-
-        public void setVertLabel(T vertLabel) {
-            this.vertLabel = vertLabel;
-        }
-
-        public Node getRightChild() {
-            return rightChild;
-        }
-
-        public void setRightChild(Node rightChild) {
-            this.rightChild = rightChild;
-        }
-
-        public Node getLeftChild() {
-            return leftChild;
-        }
-
-        public void setLeftChild(Node leftChild) {
-            this.leftChild = leftChild;
-        }
-
-        public Node getParent() {
-            return parent;
-        }
-
-        public void setParent(Node parent) {
-            this.parent = parent;
-        }
-
-
-
-    }
 
 } // end of class SequentialRepresentation
 
