@@ -43,7 +43,9 @@ public class LinkedRepresentation<T> implements BSPTree<T> {
 
     @Override
     public boolean findNode(T nodeLabel) {
-        // Implement me!
+        for (int i = 0; i <= size; i++) {
+            // Implement me!
+        }
         return false;
     } // end of findNode
 
@@ -80,7 +82,7 @@ public class LinkedRepresentation<T> implements BSPTree<T> {
         protected Node rightChild, leftChild, parent;
 
 
-        public Node(T vertLabel) {
+        protected Node(T vertLabel) {
             this.vertLabel = vertLabel;
             this.leftChild = null;
             this.rightChild = null;

@@ -14,7 +14,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
      */
 
     public SequentialRepresentation() {
-        // Implement me!
+        T[] binaryTreeArray = (T[]) new Object[100];
     } // end of SequentialRepresentation()
 
     @Override
@@ -59,6 +59,53 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
     public void printInPostorder(PrintWriter writer) {
         // Implement me!
     } // end of printInPostorder
+
+
+//    protected class Node{
+//        protected T vertLabel;
+//        protected Node rightChild, leftChild, parent;
+//
+//
+//        protected Node(T vertLabel) {
+//            this.vertLabel = vertLabel;
+//            this.leftChild = null;
+//            this.rightChild = null;
+//            this.parent = null;
+//        }
+//
+//        public T getVertLabel() {
+//            return vertLabel;
+//        }
+//
+//        public void setVertLabel(T vertLabel) {
+//            this.vertLabel = vertLabel;
+//        }
+//
+//        public Node getRightChild() {
+//            return rightChild;
+//        }
+//
+//        public void setRightChild(Node rightChild) {
+//            this.rightChild = rightChild;
+//        }
+//
+//        public Node getLeftChild() {
+//            return leftChild;
+//        }
+//
+//        public void setLeftChild(Node leftChild) {
+//            this.leftChild = leftChild;
+//        }
+//
+//        public Node getParent() {
+//            return parent;
+//        }
+//
+//        public void setParent(Node parent) {
+//            this.parent = parent;
+//        }
+
+    }
 
 } // end of class SequentialRepresentation
 
