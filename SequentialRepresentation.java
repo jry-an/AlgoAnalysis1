@@ -40,9 +40,10 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         // Implement me!
         //if node exists, then check if left and right children aren't already set
         if(findNode(srcLabel)){
-        //    binaryTreeArray[]
-
-
+            //get position of srcLabel
+           int nodePos =  getNodePosition(srcLabel);
+           binaryTreeArray[2 * nodePos + 1] = leftChild;
+           binaryTreeArray[2 * nodePos + 2] = rightChild;
         }
 
     } // end of splitNode
@@ -50,19 +51,38 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
     @Override
     public boolean findNode(T nodeLabel) {
         // Implement me!
+        for (int i = 0; i < binaryTreeArray.length; i++ ){
+            if (binaryTreeArray[i] == nodeLabel){
+                return true;
+            }
+        }
         return false;
     } // end of findNode
+
+
 
     @Override
     public String findParent(T nodeLabel) {
         // Implement me!
+        //not sure if right, need to figure out what to return
+        String parent;
+        for (int i = 0; i < binaryTreeArray.length; i++){
+            if (binaryTreeArray[i] == nodeLabel){
+                parent = binaryTreeArray[i-1/2].toString();
+                return parent;
+            }
+        }
         return null;
     } // end of findParent
 
     @Override
     public String findChildren(T nodeLabel) {
         // Implement me!
-        return null;
+        String leftChild,rightChild;
+       int nodePos =  getNodePosition(nodeLabel);
+       leftChild =  binaryTreeArray[2 * nodePos + 1].toString();
+       rightChild = binaryTreeArray[2 * nodePos + 2].toString();
+        return (leftChild + " " + rightChild);
     } // end of findParent
 
     @Override
@@ -79,6 +99,16 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
     public void printInPostorder(PrintWriter writer) {
         // Implement me!
     } // end of printInPostorder
+
+
+    private int getNodePosition(T nodeLabel){
+        for (int i = 0; i < binaryTreeArray.length; i++ ){
+            if (binaryTreeArray[i] == nodeLabel){
+                return i;
+            }
+        }
+        return 0;
+    }
 
 } // end of class SequentialRepresentation
 
