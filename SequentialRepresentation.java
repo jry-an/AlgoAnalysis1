@@ -21,12 +21,10 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
 
    protected T[] binaryTreeArray;
    protected T[] tempArray;
-   private int arraySize;
    private final int TEST_SIZE = 100;
 
     public SequentialRepresentation() {
         binaryTreeArray = (T[]) new Object[TEST_SIZE];
-         arraySize = 0;
     } // end of SequentialRepresentation()
 
     @Override
@@ -101,9 +99,6 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
            System.err.println("No node found");
            return null;
        } else {
-           //leftChild =  binaryTreeArray[2 * nodePos + 1];
-         //  rightChild = binaryTreeArray[2 * nodePos + 1 + 2];
-
            if (binaryTreeArray[2 * nodePos + 1] != null && binaryTreeArray[2 * nodePos + 2] != null) {
                return (nodeLabel + " " + binaryTreeArray[2 * nodePos + 1] + " " + binaryTreeArray[2 * nodePos + 2]);
            } else if(binaryTreeArray[2 * nodePos + 1] != null && binaryTreeArray[2 * nodePos + 2] == null){
@@ -129,16 +124,16 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         */
         int index = 0;
         tempArray = (T[]) new Object[binaryTreeArray.length];
-        
+
         // check if Tree is empty (no root node)
         if(binaryTreeArray[0] == null || binaryTreeArray[0] == EMPTY_NODE) {
             return;
         }
         // run preOrder recursive algorithm starting from index
         preOrder(index);
-        
+
         // iterate through tempArray and print nodes in Preorder
-        for (int i=0; i<tempArray.length; i++) {
+        for (int i=0; i<tempArray.length-1; i++) {
         	System.out.print(tempArray[i].toString() + " ");
         	writer.print(tempArray[i].toString() + " ");
         }
@@ -147,26 +142,26 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
 
 
     } // end of printInPreorder
-    
+
     public void preOrder(int index) {
-    	
+
     	tempArray[index] = binaryTreeArray[index];
     	System.out.println("ADDED: " + tempArray[index].toString());
-    	
+
     	int leftNodeIndex = 2*index + 1;
-    	
+
     	// check left sub tree
         if (findNode(binaryTreeArray[leftNodeIndex])) {
         	if (leftNodeIndex < tempArray.length) {
-            	preOrder(leftNodeIndex);	
+            	preOrder(leftNodeIndex);
         	}
         }
-        
+
         int rightNodeIndex = 2*index + 2;
         // check right sub tree
         if (findNode(binaryTreeArray[rightNodeIndex])) {
         	if (rightNodeIndex < tempArray.length) {
-	        	preOrder(rightNodeIndex);	
+	        	preOrder(rightNodeIndex);
 	    	}
         }
     }
