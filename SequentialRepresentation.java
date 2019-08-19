@@ -120,30 +120,30 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
 
     @Override
     public void printInPreorder(PrintWriter writer) {
-        // Implement me!
-    	// Root, Left, Right
-        /*
-        1. Visit the root.
-        2. Traverse the left subtree
-        3. Traverse the right subtree
-        */
-        int index = 0;
-        tempArray = (T[]) new Object[binaryTreeArray.length];
-        
-        // check if Tree is empty (no root node)
-        if(binaryTreeArray[0] == null || binaryTreeArray[0] == EMPTY_NODE) {
-            return;
-        }
-        // run preOrder recursive algorithm starting from index
-        preOrder(index);
-        
-        // iterate through tempArray and print nodes in Preorder
-        for (int i=0; i<tempArray.length; i++) {
-        	System.out.print(tempArray[i].toString() + " ");
-        	writer.print(tempArray[i].toString() + " ");
-        }
-        writer.println();
-        System.out.println();
+//        // Implement me!
+//    	// Root, Left, Right
+//        /*
+//        1. Visit the root.
+//        2. Traverse the left subtree
+//        3. Traverse the right subtree
+//        */
+//        int index = 0;
+//        tempArray = (T[]) new Object[binaryTreeArray.length];
+//        
+//        // check if Tree is empty (no root node)
+//        if(binaryTreeArray[0] == null || binaryTreeArray[0] == EMPTY_NODE) {
+//            return;
+//        }
+//        // run preOrder recursive algorithm starting from index
+//        preOrder(index);
+//        
+//        // iterate through tempArray and print nodes in Preorder
+//        for (int i=0; i<tempArray.length; i++) {
+//        	System.out.print(tempArray[i].toString() + " ");
+//        	writer.print(tempArray[i].toString() + " ");
+//        }
+//        writer.println();
+//        System.out.println();
 
 
     } // end of printInPreorder
