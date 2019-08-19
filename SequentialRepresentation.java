@@ -26,8 +26,12 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
 
     @Override
     public void setRootNode(T nodeLabel) {
-        if (binaryTreeArray[1] != EMPTY_NODE){
-            binaryTreeArray [1] = nodeLabel;
+        if (binaryTreeArray[0] != EMPTY_NODE){
+            binaryTreeArray [0] = nodeLabel;
+            System.err.print("Root = " + binaryTreeArray[1].toString());
+            if (binaryTreeArray[0] == EMPTY_NODE){
+                System.err.println("Root node null!");
+            }
         } else {
             System.out.println("Root already set");
         }
@@ -42,7 +46,11 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
             //get position of srcLabel
            int nodePos =  getNodePosition(srcLabel);
            binaryTreeArray[2 * nodePos] = leftChild;
-           binaryTreeArray[2 * nodePos + 1] = rightChild;
+           binaryTreeArray[2 * nodePos + 2] = rightChild;
+           System.err.println("Left: " +binaryTreeArray[2 * nodePos].toString() + "Right = " + binaryTreeArray[2 * nodePos+1].toString() );
+        }
+        else {
+            System.err.println("Node to split not found ");
         }
 
     } // end of splitNode
@@ -51,10 +59,12 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
     public boolean findNode(T nodeLabel) {
         // Implement me!
         for (int i = 1; i < binaryTreeArray.length-1; i++ ){
+            System.err.print(binaryTreeArray[i]);
             if (binaryTreeArray[i] == nodeLabel){
                 return true;
             }
         }
+        System.err.print("Couldn't find node");
         return false;
     } // end of findNode
 
@@ -81,16 +91,16 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
            return null;
        } else {
            //leftChild =  binaryTreeArray[2 * nodePos];
-         //  rightChild = binaryTreeArray[2 * nodePos + 1];
+         //  rightChild = binaryTreeArray[2 * nodePos + 2];
 
-           if (binaryTreeArray[2 * nodePos] != EMPTY_NODE && binaryTreeArray[2 * nodePos + 1] != EMPTY_NODE) {
-               return (nodeLabel + " " + binaryTreeArray[2 * nodePos] + " " + binaryTreeArray[2 * nodePos + 1]);
-           } else if(binaryTreeArray[2 * nodePos] != EMPTY_NODE && binaryTreeArray[2 * nodePos + 1] == EMPTY_NODE){
+           if (binaryTreeArray[2 * nodePos] != EMPTY_NODE && binaryTreeArray[2 * nodePos + 2] != EMPTY_NODE) {
+               return (nodeLabel + " " + binaryTreeArray[2 * nodePos] + " " + binaryTreeArray[2 * nodePos + 2]);
+           } else if(binaryTreeArray[2 * nodePos] != EMPTY_NODE && binaryTreeArray[2 * nodePos + 2] == EMPTY_NODE){
                return (nodeLabel + " " + binaryTreeArray[2 * nodePos]);
            }
-           else if(binaryTreeArray[2 * nodePos] == EMPTY_NODE && binaryTreeArray[2 * nodePos + 1] != EMPTY_NODE){
-               return (nodeLabel + " " + " " + binaryTreeArray[2 * nodePos + 1]);
-           } else if (binaryTreeArray[2 * nodePos] == EMPTY_NODE && binaryTreeArray[2 * nodePos + 1] == EMPTY_NODE){
+           else if(binaryTreeArray[2 * nodePos] == EMPTY_NODE && binaryTreeArray[2 * nodePos + 2] != EMPTY_NODE){
+               return (nodeLabel + " " + " " + binaryTreeArray[2 * nodePos + 2]);
+           } else if (binaryTreeArray[2 * nodePos] == EMPTY_NODE && binaryTreeArray[2 * nodePos + 2] == EMPTY_NODE){
                return (nodeLabel + " ");
            }
        }
