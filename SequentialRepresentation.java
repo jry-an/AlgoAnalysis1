@@ -105,21 +105,21 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         2. Traverse the left subtree
         3. Traverse the right subtree
         */
-        T left,right;
-            int index = 0;
-            if(binaryTreeArray[0] == null) {
-                return;
-            }
-                while (index <= binaryTreeArray.length) {
-                    T node = binaryTreeArray[index];
-                    left = binaryTreeArray[2 * index];
-                    right = binaryTreeArray[2 * index + 1];
-
-
-                    printInPreorder(writer);
-
-                    index++;
-                }
+//        T left,right;
+//            int index = 0;
+//            if(binaryTreeArray[0] == null) {
+//                return;
+//            }
+//                while (index <= binaryTreeArray.length) {
+//                    T node = binaryTreeArray[index];
+//                    left = binaryTreeArray[2 * index];
+//                    right = binaryTreeArray[2 * index + 1];
+//
+//
+//                    printInPreorder(writer);
+//
+//                    index++;
+//                }
 
 
     } // end of printInPreorder
