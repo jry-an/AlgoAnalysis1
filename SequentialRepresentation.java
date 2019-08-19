@@ -50,7 +50,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
     @Override
     public boolean findNode(T nodeLabel) {
         // Implement me!
-        for (int i = 1; i < binaryTreeArray.length; i++ ){
+        for (int i = 1; i < binaryTreeArray.length-1; i++ ){
             if (binaryTreeArray[i] == nodeLabel){
                 return true;
             }
@@ -63,7 +63,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         // Implement me!
         //not sure if right, need to figure out what to return
         String parent;
-        for (int i = 1; i < binaryTreeArray.length; i++){
+        for (int i = 1; i < binaryTreeArray.length-1; i++){
             if (binaryTreeArray[i] == nodeLabel){
                 parent = binaryTreeArray[i-1/2].toString();
                 return parent;
@@ -83,7 +83,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
            //leftChild =  binaryTreeArray[2 * nodePos];
          //  rightChild = binaryTreeArray[2 * nodePos + 1];
 
-           if (binaryTreeArray[2 * nodePos] != null && binaryTreeArray[2 * nodePos + 1] != null) {
+           if (binaryTreeArray[2 * nodePos] != EMPTY_NODE && binaryTreeArray[2 * nodePos + 1] != EMPTY_NODE) {
                return (nodeLabel + " " + binaryTreeArray[2 * nodePos] + " " + binaryTreeArray[2 * nodePos + 1]);
            } else if(binaryTreeArray[2 * nodePos] != EMPTY_NODE && binaryTreeArray[2 * nodePos + 1] == EMPTY_NODE){
                return (nodeLabel + " " + binaryTreeArray[2 * nodePos]);
@@ -100,6 +100,28 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
     @Override
     public void printInPreorder(PrintWriter writer) {
         // Implement me!
+        /*
+        1. Visit the root.
+        2. Traverse the left subtree
+        3. Traverse the right subtree
+        */
+        T left,right;
+            int index = 0;
+            if(binaryTreeArray[0] == null) {
+                return;
+            }
+                while (index <= binaryTreeArray.length) {
+                    T node = binaryTreeArray[index];
+                    left = binaryTreeArray[2 * index];
+                    right = binaryTreeArray[2 * index + 1];
+
+
+                    printInPreorder(writer);
+
+                    index++;
+                }
+
+
     } // end of printInPreorder
 
     @Override
@@ -114,7 +136,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
 
 
     private int getNodePosition(T nodeLabel){
-        for (int i = 1; i < binaryTreeArray.length; i++ ){
+        for (int i = 1; i < binaryTreeArray.length-1; i++ ){
             if (binaryTreeArray[i] == nodeLabel){
                 return i;
             }
