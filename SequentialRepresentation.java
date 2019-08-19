@@ -82,8 +82,8 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         //not sure if right, need to figure out what to return
         String parent;
         for (int i = 0; i < binaryTreeArray.length-1; i++){
-            if (binaryTreeArray[i] == nodeLabel){
-                parent = binaryTreeArray[i-1/2].toString();
+            if (binaryTreeArray[i].toString().equals(nodeLabel.toString())) {
+                parent = binaryTreeArray[(i-1)/2].toString();
                 return nodeLabel + " " + parent;
             }
         }
