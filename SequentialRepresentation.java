@@ -148,9 +148,14 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         preOrder(index);
 
         // iterate through tempArray and print nodes in Preorder
-        for (int i=0; i < tempArray.length; i++) {
-        	System.out.print(tempArray[i].toString() + " ");
-        	writer.print(tempArray[i].toString() + " ");
+        for (int i=0; i < tempArray.length-1; i++) {
+            if (tempArray[i] == null){
+                break;
+            } else{
+                System.err.print(tempArray[i] + " ");
+                writer.print(tempArray[i].toString() + " ");
+            }
+
         }
         writer.println();
         System.out.println();
@@ -159,7 +164,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
     } // end of printInPreorder
 
     public void preOrder(int index) {
-
+        if (binaryTreeArray[index] != null) {
             tempArray[index] = binaryTreeArray[index];
             System.err.println("index = " + tempArray[index].toString());
             System.out.println("ADDED: " + tempArray[index].toString());
@@ -174,9 +179,9 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
 
 
             // check left sub tree
-        if (binaryTreeArray[leftNodeIndex] != null) {
-            if (findNode(binaryTreeArray[leftNodeIndex])) {
-                if (leftNodeIndex < tempArray.length) {
+            if (binaryTreeArray[leftNodeIndex] != null) {
+                if (findNode(binaryTreeArray[leftNodeIndex])) {
+                    if (leftNodeIndex < tempArray.length) {
                         preOrder(leftNodeIndex);
                     }
                 }
@@ -184,14 +189,15 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
 
             int rightNodeIndex = 2 * index + 2;
             // check right sub tree
-        if (binaryTreeArray[rightNodeIndex] != null) {
-            if (findNode(binaryTreeArray[rightNodeIndex])) {
-                if (rightNodeIndex < tempArray.length) {
+            if (binaryTreeArray[rightNodeIndex] != null) {
+                if (findNode(binaryTreeArray[rightNodeIndex])) {
+                    if (rightNodeIndex < tempArray.length) {
                         preOrder(rightNodeIndex);
                     }
                 }
             }
         }
+    }
 
     @Override
     public void printInInorder(PrintWriter writer) {
