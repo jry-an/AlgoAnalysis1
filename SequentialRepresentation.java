@@ -64,7 +64,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
             System.err.println(2 * nodePos + 2);
 
 
-            System.err.println("Left: " +binaryTreeArray[2 * nodePos + 1].toString() + " Right = " + binaryTreeArray[2 * nodePos + 2].toString() );
+            System.err.println("Left: " +binaryTreeArray[2 * nodePos + 1].toString() + " Right = " + binaryTreeArray[2 * nodePos + 2].toString());
         }
         else {
             System.err.println("Node to split not found ");
@@ -77,8 +77,11 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         // Implement me!
         System.err.println("find node: " + nodeLabel );
         for (int i = 0; i < binaryTreeArray.length-1; i++) {
-            if (binaryTreeArray[i].toString().equals(nodeLabel.toString())) {
-                return true;
+            System.err.println(binaryTreeArray[i]);
+            if (binaryTreeArray[i] != null) {
+                if (binaryTreeArray[i].toString().equals(nodeLabel.toString())) {
+                    return true;
+                }
             }
         }
        // System.err.println("Couldn't find node @ findNode()");
@@ -111,7 +114,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
        int nodePos =  getNodePosition(nodeLabel);
         int left = 2 * nodePos + 1;
         int right = 2 * nodePos + 2;
-        if (nodePos == 0) {
+        if (nodePos < 0) {
            System.err.println("No node found");
            return null;
        } else {
@@ -213,11 +216,13 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
 
     private int getNodePosition(T nodeLabel){
         for (int i = 0; i < binaryTreeArray.length-1; i++ ){
-            if (binaryTreeArray[i].toString().equals(nodeLabel.toString())) {
-                return i;
+            if (binaryTreeArray[i] != null) {
+                if (binaryTreeArray[i].toString().equals(nodeLabel.toString())) {
+                    return i;
+                }
             }
         }
-        return 0;
+        return -1;
     }
 
     private T[] dynamicArray(T[] array){
