@@ -90,12 +90,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         String parent;
         for (int i = 0; i < binaryTreeArray.length-1; i++){
             if (binaryTreeArray[i].toString().equals(nodeLabel.toString())) {
-                if (i%2 ==0) {  //if i%2 then i is left child
-                    parent = binaryTreeArray[(i/2)-1].toString();
-                }
-                else { //else it's right child
-                    parent = binaryTreeArray[(i/2)-2].toString();
-                }
+                parent = binaryTreeArray[(i-1)/2].toString();
                 return nodeLabel + " " + parent;
             }
         }
@@ -161,6 +156,12 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
     	tempArray[index] = binaryTreeArray[index];
     	System.out.println("ADDED: " + tempArray[index].toString());
 
+    	//print list
+        System.err.println("Tree: ");
+        for (int i = 0; i <binaryTreeArray.length ; i++) {
+            System.err.println(binaryTreeArray[i].toString());
+        }
+
     	int leftNodeIndex = 2 * index + 1;
 
     	// check left sub tree
@@ -199,9 +200,8 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         return 0;
     }
 
-    protected T[] dynamicArray(T[] array){
-       T[] newDynamicArray = (T[]) new Object[array.length*3];
-       return newDynamicArray;
+    private T[] dynamicArray(T[] array){
+        return (T[]) new Object[array.length*3];
     }
 
 } // end of class SequentialRepresentation
