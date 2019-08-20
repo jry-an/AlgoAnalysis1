@@ -15,6 +15,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
      */
 
     /*
+    A B C D E F G
     left	2 * i + 1
     right	2 * i + 2
     javac -cp .:jopt-simple-5.0.2.jar:sample.jar *.java
@@ -74,7 +75,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
     public boolean findNode(T nodeLabel) {
         // Implement me!
         System.err.println("find node: " + nodeLabel );
-        for (int i = 0; i < binaryTreeArray.length; i++) {
+        for (int i = 0; i < binaryTreeArray.length-1; i++) {
             if (binaryTreeArray[i].toString().equals(nodeLabel.toString())) {
                 return true;
             }
@@ -89,7 +90,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         //not sure if right, need to figure out what to return
         String parent;
         for (int i = 0; i < binaryTreeArray.length-1; i++){
-            if (binaryTreeArray[i].toString().equals(nodeLabel.toString())) {
+            if (binaryTreeArray[i]== nodeLabel) {
 //                if (i%2 ==0) {  //if i%2 then i is left child
 //                    parent = binaryTreeArray[(i/2)-1].toString();
 //                }
@@ -147,7 +148,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         preOrder(index);
 
         // iterate through tempArray and print nodes in Preorder
-        for (int i=0; i<tempArray.length; i++) {
+        for (int i=0; i<tempArray.length-1; i++) {
         	System.out.print(tempArray[i].toString() + " ");
         	writer.print(tempArray[i].toString() + " ");
         }
@@ -159,32 +160,38 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
 
     public void preOrder(int index) {
 
-    	tempArray[index] = binaryTreeArray[index];
-    	System.out.println("ADDED: " + tempArray[index].toString());
+            tempArray[index] = binaryTreeArray[index];
+            System.err.println("index = " + tempArray[index].toString());
+            System.out.println("ADDED: " + tempArray[index].toString());
 
-    	//print list
-        System.err.println("Tree: ");
-        for (int i = 0; i <binaryTreeArray.length ; i++) {
-            System.err.println(binaryTreeArray[i].toString());
+            //print list
+//        System.err.println("Tree: ");
+//        for (int i = 0; i <tempArray.length-1; i++) {
+//            System.err.println(tempArray[i]);
+//        }
+
+            int leftNodeIndex = 2 * index + 1;
+
+
+            // check left sub tree
+        if (binaryTreeArray[leftNodeIndex] != null) {
+            if (findNode(binaryTreeArray[leftNodeIndex])) {
+                if (leftNodeIndex < tempArray.length) {
+                        preOrder(leftNodeIndex);
+                    }
+                }
+            }
+
+            int rightNodeIndex = 2 * index + 2;
+            // check right sub tree
+        if (binaryTreeArray[rightNodeIndex] != null) {
+            if (findNode(binaryTreeArray[rightNodeIndex])) {
+                if (rightNodeIndex < tempArray.length) {
+                        preOrder(rightNodeIndex);
+                    }
+                }
+            }
         }
-
-    	int leftNodeIndex = 2 * index + 1;
-
-    	// check left sub tree
-        if (findNode(binaryTreeArray[leftNodeIndex])) {
-        	if (leftNodeIndex < tempArray.length) {
-            	preOrder(leftNodeIndex);
-        	}
-        }
-
-        int rightNodeIndex = 2*index + 2;
-        // check right sub tree
-        if (findNode(binaryTreeArray[rightNodeIndex])) {
-        	if (rightNodeIndex < tempArray.length) {
-	        	preOrder(rightNodeIndex);
-	    	}
-        }
-    }
 
     @Override
     public void printInInorder(PrintWriter writer) {
