@@ -90,7 +90,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         //not sure if right, need to figure out what to return
         String parent;
         for (int i = 0; i < binaryTreeArray.length-1; i++){
-            if (binaryTreeArray[i]== nodeLabel) {
+            if (binaryTreeArray[i].toString().equals(nodeLabel)) {
 //                if (i%2 ==0) {  //if i%2 then i is left child
 //                    parent = binaryTreeArray[(i/2)-1].toString();
 //                }
@@ -148,7 +148,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         preOrder(index);
 
         // iterate through tempArray and print nodes in Preorder
-        for (int i=0; i<tempArray.length-1; i++) {
+        for (int i=0; i < tempArray.length; i++) {
         	System.out.print(tempArray[i].toString() + " ");
         	writer.print(tempArray[i].toString() + " ");
         }
