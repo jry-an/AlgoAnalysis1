@@ -25,7 +25,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
 
    protected T[] binaryTreeArray;
    protected T[] tempArray;
-   protected int preOrdercounter = 0;
+   protected int preOrderCounter = 0;
     private final int TEST_SIZE = 100;
 
     public SequentialRepresentation() {
@@ -166,10 +166,10 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
 
     public void preOrder(int index) {
         if (binaryTreeArray[index] != null) {
-            tempArray[preOrdercounter] = binaryTreeArray[index];
-            System.err.println("index = " + tempArray[preOrdercounter].toString());
-            System.out.println("ADDED: " + tempArray[preOrdercounter].toString());
-            preOrdercounter ++;
+            tempArray[preOrderCounter] = binaryTreeArray[index];
+            System.err.println("index = " + tempArray[preOrderCounter].toString());
+            System.out.println("ADDED: " + tempArray[preOrderCounter].toString());
+            preOrderCounter ++;
             //print list
 //        System.err.println("Tree: ");
 //        for (int i = 0; i <tempArray.length-1; i++) {
