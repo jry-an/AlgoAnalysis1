@@ -90,6 +90,12 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         String parent;
         for (int i = 0; i < binaryTreeArray.length-1; i++){
             if (binaryTreeArray[i].toString().equals(nodeLabel.toString())) {
+//                if (i%2 ==0) {  //if i%2 then i is left child
+//                    parent = binaryTreeArray[(i/2)-1].toString();
+//                }
+//                else { //else it's right child
+//                    parent = binaryTreeArray[(i/2)-2].toString();
+//                }
                 parent = binaryTreeArray[(i-1)/2].toString();
                 return nodeLabel + " " + parent;
             }
