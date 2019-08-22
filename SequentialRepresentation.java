@@ -77,7 +77,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         // Implement me!
         System.err.println("find node: " + nodeLabel );
         for (int i = 0; i < binaryTreeArray.length-1; i++) {
-            System.err.println(binaryTreeArray[i]);
+            //System.err.println(binaryTreeArray[i]);
             if (binaryTreeArray[i] != null) {
                 if (binaryTreeArray[i].toString().equals(nodeLabel.toString())) {
                     return true;
@@ -214,7 +214,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         if(binaryTreeArray[0] == null || binaryTreeArray[0] == EMPTY_NODE) {
             return;
         }
-        // run inOrder recursive algorithm starting from index
+        // run inOrder recursive algorithm starting from index 0 (root)
         counter = 0;
         inOrder(index);
 
@@ -242,11 +242,11 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
             if (binaryTreeArray[leftNodeIndex] != null) {
                 if (findNode(binaryTreeArray[leftNodeIndex])) {
                     if (leftNodeIndex < tempArray.length) {
-                        preOrder(leftNodeIndex);
+                        inOrder(leftNodeIndex);
                     }
                 }
             }
-            
+        	System.out.println("counter = "+ counter);
             tempArray[counter] = binaryTreeArray[index];
             counter ++;
 
@@ -255,7 +255,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
             if (binaryTreeArray[rightNodeIndex] != null) {
                 if (findNode(binaryTreeArray[rightNodeIndex])) {
                     if (rightNodeIndex < tempArray.length) {
-                        preOrder(rightNodeIndex);
+                        inOrder(rightNodeIndex);
                     }
                 }
             }
@@ -265,8 +265,66 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
     @Override
     public void printInPostorder(PrintWriter writer) {
         // Implement me!
-    } // end of printInPostorder
+    	// Root, Left, Right
+        /*
+        1. Traverse the left subtree
+        2. Traverse the right subtree
+        3. Visit the root.
+        */
+        int index = 0;
+        tempArray = (T[]) new Object[binaryTreeArray.length];
 
+        // check if Tree is empty (no root node)
+        if(binaryTreeArray[0] == null || binaryTreeArray[0] == EMPTY_NODE) {
+            return;
+        }
+        // run preOrder recursive algorithm starting from index
+        counter = 0;
+        postOrder(index);
+
+        // iterate through tempArray and print nodes in Preorder
+        for (int i=0; i < tempArray.length-1; i++) {
+            if (tempArray[i] == null){
+                break;
+            } else{
+                System.err.print(tempArray[i] + " ");
+                writer.print(tempArray[i].toString() + " ");
+            }
+
+        }
+        writer.println();
+        System.out.println();
+
+
+    } // end of printInPreorder
+
+    public void postOrder(int index) {
+        if (binaryTreeArray[index] != null) {
+            int leftNodeIndex = 2 * index + 1;
+
+            // check left sub tree
+            if (binaryTreeArray[leftNodeIndex] != null) {
+                if (findNode(binaryTreeArray[leftNodeIndex])) {
+                    if (leftNodeIndex < tempArray.length) {
+                        postOrder(leftNodeIndex);
+                    }
+                }
+            }
+
+            int rightNodeIndex = 2 * index + 2;
+            // check right sub tree
+            if (binaryTreeArray[rightNodeIndex] != null) {
+                if (findNode(binaryTreeArray[rightNodeIndex])) {
+                    if (rightNodeIndex < tempArray.length) {
+                        postOrder(rightNodeIndex);
+                    }
+                }
+            }
+
+            tempArray[counter] = binaryTreeArray[index];
+            counter ++;
+        }
+    }
 
     private int getNodePosition(T nodeLabel){
         for (int i = 0; i < binaryTreeArray.length-1; i++ ){
@@ -278,6 +336,8 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         }
         return -1;
     }
+    
+    
 
     private T[] dynamicArray(T[] array){
         return (T[]) new Object[array.length*3];
