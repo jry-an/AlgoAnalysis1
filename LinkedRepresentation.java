@@ -35,9 +35,14 @@ public class LinkedRepresentation<T> implements BSPTree<T> {
     public void splitNode(T srcLabel, T leftChild, T rightChild) {
         Node node = new Node(srcLabel);
         if (findNode(srcLabel)) {
-            node.setLeftChild(new Node(leftChild));
-            node.setRightChild(new Node(rightChild));
-            size = size+2;
+            if (leftChild != null){
+                node.setLeftChild(new Node(leftChild));
+                size++;
+            }
+            if (rightChild != null){
+                node.setRightChild(new Node(rightChild));
+                size++;
+            }
         }
     } // end of splitNode
 
@@ -58,7 +63,13 @@ public class LinkedRepresentation<T> implements BSPTree<T> {
     @Override
     public String findChildren(T nodeLabel) {
         // Implement me!
-        return null;
+        if(findNode(nodeLabel)){
+            Node temp = new Node(nodeLabel);
+            String leftChild = temp.getLeftChild().getVertLabel().toString();
+            String rightChild = temp.getRightChild().getVertLabel().toString();
+            return nodeLabel.toString() + "" + leftChild + "" + rightChild;
+        }
+        return nodeLabel.toString();
     } // end of findParent
 
     @Override
