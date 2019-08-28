@@ -89,21 +89,40 @@ public class LinkedRepresentation<T> implements BSPTree<T> {
     @Override
     public String findParent(T nodeLabel) {
         // Implement me!
-        Node node = new Node(nodeLabel);
+        Node child = new Node(nodeLabel);
+        Node temp = rootNode;
+        Node parent;
         if (nodeLabel == null){
-            System.err.println("Find parent given null nodeLabel!!");
+            System.err.println("Find parent given NULL nodeLabel!!");
+            return "nodeLabel given is NULL";
         }
-        if (node.getLeftChild().getVertLabel() == nodeLabel){
-            return nodeLabel + node.getVertLabel().toString();
+        parent = findParentRec(child,temp);
+        if (parent.getVertLabel() == null){
+            return nodeLabel.toString();
         }
-        else if (node.getRightChild().getVertLabel() == nodeLabel){
-            return nodeLabel + node.getVertLabel().toString();
-        } else {
-
-        }
-
-        return nodeLabel.toString();
+        return nodeLabel.toString() + "" + parent.getVertLabel().toString();
     } // end of findParent
+
+
+
+    private Node findParentRec(Node goal,Node temp){
+    //TODO - test
+        if(temp.getLeftChild() != null){
+            if (temp.getLeftChild().getVertLabel() == goal.getVertLabel()){
+                return temp;
+            } else{
+                findNodeRec(temp.getLeftChild(),goal);
+            }
+        }
+        if(temp.getRightChild() != null){
+            if (temp.getRightChild().getVertLabel() == goal.getVertLabel()){
+                return temp;
+            } else{
+                findNodeRec(temp.getRightChild(),goal);
+            }
+        }
+        return null;
+    }
 
     @Override
     public String findChildren(T nodeLabel) {
