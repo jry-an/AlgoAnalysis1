@@ -84,8 +84,6 @@ public class LinkedRepresentation<T> implements BSPTree<T> {
         return false;
     }
 
-
-
     @Override
     public String findParent(T nodeLabel) {
         // Implement me!
@@ -97,10 +95,11 @@ public class LinkedRepresentation<T> implements BSPTree<T> {
             return "nodeLabel given is NULL";
         }
         parent = findParentRec(child,temp);
-        if (parent.getVertLabel() == null){
+        if (parent == null){
             return nodeLabel.toString();
+        } else{
+            return nodeLabel.toString() + "" + parent.getVertLabel().toString();
         }
-        return nodeLabel.toString() + "" + parent.getVertLabel().toString();
     } // end of findParent
 
 
