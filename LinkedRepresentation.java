@@ -48,7 +48,6 @@ public class LinkedRepresentation<T> implements BSPTree<T> {
 
     @Override
     public boolean findNode(T nodeLabel) {
-
         //TODO - test
         Node temp = rootNode;
         Node goal = new Node(nodeLabel);
@@ -87,6 +86,7 @@ public class LinkedRepresentation<T> implements BSPTree<T> {
     @Override
     public String findParent(T nodeLabel) {
         // Implement me!
+        //TODO - test
         Node child = new Node(nodeLabel);
         Node temp = rootNode;
         Node parent;
