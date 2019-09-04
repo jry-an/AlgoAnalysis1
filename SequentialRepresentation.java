@@ -177,24 +177,28 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
 
             int leftNodeIndex = 2 * index + 1;
 
-            // check left sub tree
-            if (binaryTreeArray[leftNodeIndex] != null) {
-                if (findNode(binaryTreeArray[leftNodeIndex])) {
-                    if (leftNodeIndex < tempArray.length) {
-                        preOrder(leftNodeIndex);
-                    }
-                }
+            if (leftNodeIndex<binaryTreeArray.length) {
+	            // check left sub tree
+	            if (binaryTreeArray[leftNodeIndex] != null) {
+	                if (findNode(binaryTreeArray[leftNodeIndex])) {
+	                    if (leftNodeIndex < tempArray.length) {
+	                        preOrder(leftNodeIndex);
+	                    }
+	                }
+	            }
             }
 
             int rightNodeIndex = 2 * index + 2;
+            if (rightNodeIndex<binaryTreeArray.length) {
             // check right sub tree
-            if (binaryTreeArray[rightNodeIndex] != null) {
-                if (findNode(binaryTreeArray[rightNodeIndex])) {
-                    if (rightNodeIndex < tempArray.length) {
-                        preOrder(rightNodeIndex);
-                    }
-                }
-            }
+	            if (binaryTreeArray[rightNodeIndex] != null) {
+	                if (findNode(binaryTreeArray[rightNodeIndex])) {
+	                    if (rightNodeIndex < tempArray.length) {
+	                        preOrder(rightNodeIndex);
+	                    }
+	                }
+	            }
+	        }
         }
     } // end of preOrder
 
@@ -236,26 +240,30 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
     public void inOrder(int index) {
         if (binaryTreeArray[index] != null) {
             int leftNodeIndex = 2 * index + 1;
-
-            // check left sub tree
-            if (binaryTreeArray[leftNodeIndex] != null) {
-                if (findNode(binaryTreeArray[leftNodeIndex])) {
-                    if (leftNodeIndex < tempArray.length) {
-                        inOrder(leftNodeIndex);
+            
+            if (leftNodeIndex<binaryTreeArray.length) {
+            	// check left sub tree
+                if (binaryTreeArray[leftNodeIndex] != null) {
+                    if (findNode(binaryTreeArray[leftNodeIndex])) {
+                        if (leftNodeIndex < tempArray.length) {
+                            inOrder(leftNodeIndex);
+                        }
                     }
                 }
             }
-            
+                
             // visit root
             tempArray[counter] = binaryTreeArray[index];
             counter ++;
 
             int rightNodeIndex = 2 * index + 2;
-            // check right sub tree
-            if (binaryTreeArray[rightNodeIndex] != null) {
-                if (findNode(binaryTreeArray[rightNodeIndex])) {
-                    if (rightNodeIndex < tempArray.length) {
-                        inOrder(rightNodeIndex);
+            if (rightNodeIndex<binaryTreeArray.length) {
+                // check right sub tree
+                if (binaryTreeArray[rightNodeIndex] != null) {
+                    if (findNode(binaryTreeArray[rightNodeIndex])) {
+                        if (rightNodeIndex < tempArray.length) {
+                            inOrder(rightNodeIndex);
+                        }
                     }
                 }
             }
@@ -300,25 +308,30 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
     public void postOrder(int index) {
         if (binaryTreeArray[index] != null) {
         	
+        	
             // check left sub tree
         	int leftNodeIndex = 2 * index + 1;
-            if (binaryTreeArray[leftNodeIndex] != null) {
-                if (findNode(binaryTreeArray[leftNodeIndex])) {
-                    if (leftNodeIndex < tempArray.length) {
-                        postOrder(leftNodeIndex);
-                    }
-                }
-            }
+        	if (leftNodeIndex<binaryTreeArray.length) {
+	            if (binaryTreeArray[leftNodeIndex] != null) {
+	                if (findNode(binaryTreeArray[leftNodeIndex])) {
+	                    if (leftNodeIndex < tempArray.length) {
+	                        postOrder(leftNodeIndex);
+	                    }
+	                }
+	            }
+	        }
 
             // check right sub tree
             int rightNodeIndex = 2 * index + 2;
-            if (binaryTreeArray[rightNodeIndex] != null) {
-                if (findNode(binaryTreeArray[rightNodeIndex])) {
-                    if (rightNodeIndex < tempArray.length) {
-                        postOrder(rightNodeIndex);
-                    }
-                }
-            }
+            if (rightNodeIndex<binaryTreeArray.length) {
+	            if (binaryTreeArray[rightNodeIndex] != null) {
+	                if (findNode(binaryTreeArray[rightNodeIndex])) {
+	                    if (rightNodeIndex < tempArray.length) {
+	                        postOrder(rightNodeIndex);
+	                    }
+	                }
+	            }
+	        }
             
             // visit root
             tempArray[counter] = binaryTreeArray[index];

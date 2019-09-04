@@ -23,5 +23,5 @@ chrome-user-data
 *.swp
 *.swo
 *.class
-/test2-seqtree.out
-/tests/
+*.classpath
+*.project
