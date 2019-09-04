@@ -26,10 +26,10 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
    protected T[] binaryTreeArray;
    protected T[] tempArray;
    protected int counter;
-    private final int TEST_SIZE = 100;
 
-    public SequentialRepresentation() {
-        binaryTreeArray = (T[]) new Object[TEST_SIZE];
+    @SuppressWarnings("unchecked")
+	public SequentialRepresentation() {
+        binaryTreeArray = (T[]) new Object[3];
     } // end of SequentialRepresentation()
 
     @Override
@@ -48,13 +48,13 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
 
     @Override
     public void splitNode(T srcLabel, T leftChild, T rightChild) {
-        // Implement me!
         //if node exists, then check if left and right children aren't already set
         if(findNode(srcLabel)){
             //get position of srcLabel
            int nodePos =  getNodePosition(srcLabel);
            if (nodePos >= (binaryTreeArray.length/2)){
-              binaryTreeArray = dynamicArray(binaryTreeArray);
+        	   T[] newArray = dynamicArray(binaryTreeArray);
+        	   binaryTreeArray = newArray;
            }
            System.err.println(nodePos);
            binaryTreeArray[2 * nodePos + 1] = leftChild;
@@ -69,14 +69,15 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         else {
             System.err.println("Node to split not found ");
         }
+        
 
     } // end of splitNode
 
     @Override
     public boolean findNode(T nodeLabel) {
-        // Implement me!
+
         System.err.println("find node: " + nodeLabel );
-        for (int i = 0; i < binaryTreeArray.length-1; i++) {
+        for (int i = 0; i < binaryTreeArray.length; i++) {
             //System.err.println(binaryTreeArray[i]);
             if (binaryTreeArray[i] != null) {
                 if (binaryTreeArray[i].toString().equals(nodeLabel.toString())) {
@@ -84,13 +85,11 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
                 }
             }
         }
-       // System.err.println("Couldn't find node @ findNode()");
         return false;
     } // end of findNode
 
     @Override
     public String findParent(T nodeLabel) {
-        // Implement me!
         //not sure if right, need to figure out what to return
         String parent;
         for (int i = 0; i < binaryTreeArray.length-1; i++){
@@ -112,32 +111,33 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
 
     @Override
     public String findChildren(T nodeLabel) {
-        // Implement me!
+
        int nodePos =  getNodePosition(nodeLabel);
-        int left = 2 * nodePos + 1;
-        int right = 2 * nodePos + 2;
-        if (nodePos < 0) {
+       int left = 2 * nodePos + 1;
+       int right = 2 * nodePos + 2;
+       
+       if (nodePos < 0 || nodePos>=binaryTreeArray.length) {
            System.err.println("No node found");
            return null;
-       } else {
+       
+       } else if (nodePos<binaryTreeArray.length/2){
            if (binaryTreeArray[left] != null && binaryTreeArray[right] != null) {
                return (nodeLabel + " " + binaryTreeArray[left] + " " + binaryTreeArray[right]);
-           } else if(binaryTreeArray[left] != null && binaryTreeArray[right] == null){
-               return (nodeLabel + " " + binaryTreeArray[left]);
-           }
-           else if(binaryTreeArray[left] == null && binaryTreeArray[right] != null){
-               return (nodeLabel + " " + " " + binaryTreeArray[right]);
-           } else if (binaryTreeArray[left] == null && binaryTreeArray[right] == null){
-               return (nodeLabel + " ");
-           }
+           }// else if(binaryTreeArray[left] != null && binaryTreeArray[right] == null){
+//               return (nodeLabel + " " + binaryTreeArray[left]);
+//           }
+//           else if(binaryTreeArray[left] == null && binaryTreeArray[right] != null){
+//               return (nodeLabel + " " + " " + binaryTreeArray[right]);
+//           } else if (binaryTreeArray[left] == null && binaryTreeArray[right] == null){
+//               return (nodeLabel + " ");
+//           }
        }
-       return null;
+       return (nodeLabel + " ");
     } // end of findParent
-
-    @Override
+    
+    @SuppressWarnings("unchecked")
+	@Override
     public void printInPreorder(PrintWriter writer) {
-        // Implement me!
-    	// Root, Left, Right
         /*
         1. Visit the root.
         2. Traverse the left subtree
@@ -196,15 +196,14 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
                 }
             }
         }
-    }
+    } // end of preOrder
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public void printInInorder(PrintWriter writer) {
-        // Implement me!
-    	// Left, Root, Right
         /*
-        1. Visit the root.
-        2. Traverse the left subtree
+        1. Traverse the left subtree
+        2. Visit the root.
         3. Traverse the right subtree
         */
         int index = 0;
@@ -246,7 +245,8 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
                     }
                 }
             }
-        	System.out.println("counter = "+ counter);
+            
+            // visit root
             tempArray[counter] = binaryTreeArray[index];
             counter ++;
 
@@ -260,12 +260,11 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
                 }
             }
         }
-    }
+    } // end of inOrder
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public void printInPostorder(PrintWriter writer) {
-        // Implement me!
-    	// Root, Left, Right
         /*
         1. Traverse the left subtree
         2. Traverse the right subtree
@@ -282,7 +281,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         counter = 0;
         postOrder(index);
 
-        // iterate through tempArray and print nodes in Preorder
+        // iterate through tempArray and print nodes in Postorder
         for (int i=0; i < tempArray.length-1; i++) {
             if (tempArray[i] == null){
                 break;
@@ -300,9 +299,9 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
 
     public void postOrder(int index) {
         if (binaryTreeArray[index] != null) {
-            int leftNodeIndex = 2 * index + 1;
-
+        	
             // check left sub tree
+        	int leftNodeIndex = 2 * index + 1;
             if (binaryTreeArray[leftNodeIndex] != null) {
                 if (findNode(binaryTreeArray[leftNodeIndex])) {
                     if (leftNodeIndex < tempArray.length) {
@@ -311,8 +310,8 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
                 }
             }
 
-            int rightNodeIndex = 2 * index + 2;
             // check right sub tree
+            int rightNodeIndex = 2 * index + 2;
             if (binaryTreeArray[rightNodeIndex] != null) {
                 if (findNode(binaryTreeArray[rightNodeIndex])) {
                     if (rightNodeIndex < tempArray.length) {
@@ -320,14 +319,15 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
                     }
                 }
             }
-
+            
+            // visit root
             tempArray[counter] = binaryTreeArray[index];
             counter ++;
         }
-    }
+    } // end of postOrder
 
     private int getNodePosition(T nodeLabel){
-        for (int i = 0; i < binaryTreeArray.length-1; i++ ){
+        for (int i = 0; i < binaryTreeArray.length; i++ ){
             if (binaryTreeArray[i] != null) {
                 if (binaryTreeArray[i].toString().equals(nodeLabel.toString())) {
                     return i;
@@ -339,8 +339,16 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
     
     
 
-    private T[] dynamicArray(T[] array){
-        return (T[]) new Object[array.length*3];
+    @SuppressWarnings("unchecked")
+	private T[] dynamicArray(T[] array){
+    	T[] newArray = (T[]) new Object[array.length*2+1];
+    	
+    	//copy oldArray to newArray
+    	for (int i=0; i<array.length; i++) {
+    		newArray[i] = array[i];
+    	}
+    	
+        return newArray;
     }
 
 } // end of class SequentialRepresentation
