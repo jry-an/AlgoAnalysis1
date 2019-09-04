@@ -53,7 +53,14 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
             //get position of srcLabel
            int nodePos =  getNodePosition(srcLabel);
            if (nodePos >= (binaryTreeArray.length/2)){
-        	   T[] newArray = dynamicArray(binaryTreeArray);
+        	   //TODO Devise an appropriate way of setting new length
+        	   //Test in interactive mode and see whag happens after 
+        	   //RN A
+        	   //SP A B C
+        	   //TI
+        	   //Last node is missing because that nodes 
+        	   //child doesn't exist so the node is never visited.
+        	   T[] newArray = dynamicArray(binaryTreeArray, (binaryTreeArray.length*2+1)*2+1);
         	   binaryTreeArray = newArray;
            }
            System.err.println(nodePos);
@@ -353,8 +360,8 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
     
 
     @SuppressWarnings("unchecked")
-	private T[] dynamicArray(T[] array){
-    	T[] newArray = (T[]) new Object[array.length*2+1];
+	private T[] dynamicArray(T[] array, int newSize){
+    	T[] newArray = (T[]) new Object[newSize];
     	
     	//copy oldArray to newArray
     	for (int i=0; i<array.length; i++) {
