@@ -30,19 +30,27 @@ public class LinkedRepresentation<T> implements BSPTree<T> {
         rootNode = new Node(nodeLabel);
         size++;
     } // end of setRootNode()
-
+    
+    @SuppressWarnings("unchecked")
     @Override
     public void splitNode(T srcLabel, T leftChild, T rightChild) {
         Node node = new Node(srcLabel);
         if (findNode(srcLabel)) {
-            if (leftChild != null){
+
+            if (leftChild == null){
+                System.err.println("Left child of " + srcLabel + " is null");
+                leftChild = (T) EMPTY_NODE;
+            }
+            if (rightChild == null){
+                System.err.println("Right child of " + srcLabel + " is null");
+                rightChild = (T) EMPTY_NODE;
+            }
                 node.setLeftChild(new Node(leftChild));
                 size++;
-            }
-            if (rightChild != null){
+
                 node.setRightChild(new Node(rightChild));
                 size++;
-            }
+
         }
     } // end of splitNode
 

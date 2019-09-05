@@ -45,7 +45,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         }
 
     } // end of setRootNode()
-
+    @SuppressWarnings("unchecked")
     @Override
     public void splitNode(T srcLabel, T leftChild, T rightChild) {
         //if node exists, then check if left and right children aren't already set
@@ -90,7 +90,6 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
 
     @Override
     public boolean findNode(T nodeLabel) {
-
         System.err.println("find node: " + nodeLabel );
         for (int i = 0; i < binaryTreeArray.length; i++) {
             //System.err.println(binaryTreeArray[i]);
@@ -170,7 +169,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         preOrder(index);
 
         // iterate through tempArray and print nodes in Preorder
-        for (int i=0; i < tempArray.length-1; i++) {
+        for (int i=0; i < tempArray.length; i++) {
             if (tempArray[i] == null){
                 break;
             } else{
@@ -237,7 +236,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         inOrder(index);
 
         // iterate through tempArray and print nodes in inOrder
-        for (int i=0; i < tempArray.length-1; i++) {
+        for (int i=0; i < tempArray.length; i++) {
             if (tempArray[i] == null){
                 break;
             } else{
@@ -305,7 +304,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         postOrder(index);
 
         // iterate through tempArray and print nodes in Postorder
-        for (int i=0; i < tempArray.length-1; i++) {
+        for (int i=0; i < tempArray.length; i++) {
             if (tempArray[i] == null){
                 break;
             } else{
