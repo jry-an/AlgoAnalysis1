@@ -54,7 +54,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
            int nodePos =  getNodePosition(srcLabel);
            if (nodePos >= (binaryTreeArray.length/2)){
         	   //TODO Devise an appropriate way of setting new length
-        	   //Test in interactive mode and see whag happens after 
+        	   //Test in interactive mode and see what happens after
         	   //RN A
         	   //SP A B C
         	   //TI
@@ -64,6 +64,14 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         	   binaryTreeArray = newArray;
            }
            System.err.println(nodePos);
+           if (leftChild == null){
+               System.err.println("Left child of " + srcLabel + " is null");
+               leftChild = (T) EMPTY_NODE;
+           }
+           if (rightChild == null){
+               System.err.println("Right child of " + srcLabel + " is null");
+               rightChild = (T) EMPTY_NODE;
+           }
            binaryTreeArray[2 * nodePos + 1] = leftChild;
            System.err.println(2 * nodePos + 1);
 
