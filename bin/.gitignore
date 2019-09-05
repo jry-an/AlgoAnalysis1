@@ -25,3 +25,4 @@ chrome-user-data
 *.class
 *.classpath
 *.project
+/test2-linktree.out

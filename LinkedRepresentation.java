@@ -95,6 +95,7 @@ public class LinkedRepresentation<T> implements BSPTree<T> {
 
     @Override
     public String findParent(T nodeLabel) {
+    	//TODO desiredNode.getParent is null sometimes when it shouldn't be
         
         if (nodeLabel == null){
             System.err.println("Find parent given NULL nodeLabel!!");
@@ -115,6 +116,7 @@ public class LinkedRepresentation<T> implements BSPTree<T> {
 
     @Override
     public String findChildren(T nodeLabel) {
+    	//TODO this is not working as intended (desiredNode.getLeftChild and RightChild are null
         // Implement me!
         if(findNode(nodeLabel)){
             if (desiredNode.getLeftChild() != null && desiredNode.getRightChild() != null) {
