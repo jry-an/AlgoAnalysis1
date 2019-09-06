@@ -27,3 +27,7 @@ chrome-user-data
 *.project
 /test2-linktree.out
 /tests/
+/BSP_combined.txt
+/test2-sample.out
+/testBSP-linktree.out
+/testBSP-seqtree.out
