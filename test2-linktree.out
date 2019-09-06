@@ -1,7 +1,10 @@
 false
 true
-F A
-B
+F C
+B A
 A
-C
+C F G
 B
+A B C F G 
+B A F C G 
+B F G C A 

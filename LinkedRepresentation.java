@@ -12,165 +12,304 @@ import java.io.PrintWriter;
  */
 public class LinkedRepresentation<T> implements BSPTree<T> {
 
-    /**
-     * Constructs empty tree.
-     */
+	private Node foundNode;
+	private String nodeParent;
 	private boolean isFound;
-	private Node desiredNode;
     protected Node rootNode;
     protected int size;
+    private int counter;
+    private T[] tempArray;
 
     public LinkedRepresentation() {
         rootNode = null;
+        size = 0;
     } // end of LinkedRepresentation()
 
     @Override
     public void setRootNode(T nodeLabel) {
-        rootNode = new Node(nodeLabel, null);
-        System.err.println(rootNode.getVertLabel());
+    	if (rootNode == null) {
+    		rootNode = new Node(nodeLabel);
+    		size+=1;
+            System.err.println(rootNode.getVertLabel());
+    	}
+        
     } // end of setRootNode()
 
-    @SuppressWarnings("unchecked")
     @Override
     public void splitNode(T srcLabel, T leftChild, T rightChild) {
-        Node node = rootNode;
+        //check if srcLabel exists in tree
         if (findNode(srcLabel)) {
-
-            if (leftChild == null){
-                System.err.println("Left child of " + srcLabel + " is null");
-                leftChild = (T) EMPTY_NODE;
-            }
-            if (rightChild == null){
-                System.err.println("Right child of " + srcLabel + " is null");
-                rightChild = (T) EMPTY_NODE;
-            }
-            node.setLeftChild(new Node(leftChild, node));
-            node.setRightChild(new Node(rightChild, node));
-
-        }
-        else{
-            System.err.println("Find node failed");
+        	//check if left and right child nodes are not already set
+        	if (foundNode.getLeftChild() == null && foundNode.getRightChild() == null) {
+        		//check if left and right childs passed through function are not null
+        		if (leftChild != null && rightChild != null) {
+            		//if all true, set the foundNode's children to new Nodes
+            		foundNode.setLeftChild(new Node(leftChild));
+            		foundNode.setRightChild(new Node(rightChild));
+            		size +=2;
+            	}
+        	}
         }
     } // end of splitNode
 
     @Override
     public boolean findNode(T nodeLabel) {
-        //TODO - test
-        Node start = rootNode;
-        Node goal = new Node(nodeLabel, null);
-        if(nodeLabel == null){
-            return false;
-        }
-        isFound = false;
-        findNodeRec(goal, start);
-        
-        return isFound;
+    	//traverses the tree then sets foundNode equal to the Node found.
+		Node start = rootNode;
+		
+		if (nodeLabel != null) {
+			String goal = nodeLabel.toString();
+			foundNode = null;
+			isFound = false;
+			recFindNode(start, goal);
+		}
+    	return isFound;
     } // end of findNode
 
-    private void findNodeRec(Node goal, Node temp){
-        System.err.println("root = " + temp.getVertLabel().toString());
-
-        if (temp.getVertLabel().toString().equals(goal.getVertLabel().toString())){
-        	desiredNode = temp;
-        	isFound = true;
-        } 
-        else {
-        	Node left = temp.getLeftChild();
-        	if (left != null) {
-        		System.out.println("left = " + temp.getLeftChild().getVertLabel().toString());
-        		findNodeRec(goal, left);
-        	}
-
+    private void recFindNode(Node temp, String goal) {
+    	String tempLabel;
+    	//check base case (rootNode = goal)
+    	tempLabel = temp.getVertLabel().toString();
+    	if (tempLabel.equals(goal)) {
+    		isFound = true;
+    		foundNode = temp;
+    		return;
+    	}
+    	// recurring call
+    	else {
+    		Node left = temp.getLeftChild();
         	Node right = temp.getRightChild();
-        	if (right != null) {
-        		System.out.println("right = " + temp.getRightChild().getVertLabel().toString());
-        		findNodeRec(goal, right);
-        	}
         	
         	if (right == null && left == null) {
         		return;
         	}
-        }
-    }
+        	
+        	if (left != null) {
+        		recFindNode(left, goal);
+        	}
+
+        	if (right != null) {
+        		recFindNode(right, goal);
+        	}
+    	}
+		
+	}
 
     @Override
     public String findParent(T nodeLabel) {
-    	//TODO desiredNode.getParent is null sometimes when it shouldn't be
-        
-        if (nodeLabel == null){
-            System.err.println("Find parent given NULL nodeLabel!!");
-            return "nodeLabel given is NULL";
-        }
-
-        if (findNode(nodeLabel)) {
-        	Node parent = desiredNode.getParent();
-            
-            if (parent != null){
-                return (nodeLabel.toString() + " " + parent.getVertLabel().toString());
-            }
-        }
-        return nodeLabel.toString();
-        
+    	String goalChild = nodeLabel.toString();
+    	Node start = rootNode;
+    	nodeParent = null;
+    	
+    	//if node is in tree
+    	if (findNode(nodeLabel)) {
+    		//starting from the root node, 
+    		//return parent when child node = nodeLabel
+    		recFindParent(start, goalChild);
+    		
+    	}
+    	if (nodeParent == null) {
+    		return nodeLabel.toString();
+    	}
+    	return nodeLabel.toString() + " " + nodeParent;
     } // end of findParent
 
 
-    @Override
+    private void recFindParent(Node temp, String nodeLabel) {
+    	if (temp.getLeftChild() != null && temp.getRightChild() != null) {
+	    	//check if left child matches nodeLabel
+	    	String left = temp.getLeftChild().getVertLabel().toString();
+	    	if (left.equals(nodeLabel)) {
+	    		nodeParent = temp.getVertLabel().toString();
+	    	}
+	    	//recur until child found 
+	    	recFindParent(temp.getLeftChild(), nodeLabel);
+	    	
+	    	//check if right child matches nodeLabel
+	    	String right = temp.getRightChild().getVertLabel().toString();
+	    	if (right.equals(nodeLabel)) {
+	    		nodeParent = temp.getVertLabel().toString();
+	    	}
+	    	//recur until child found 
+	    	recFindParent(temp.getRightChild(), nodeLabel);
+    	}
+	}
+
+	@Override
     public String findChildren(T nodeLabel) {
-    	//TODO this is not working as intended (desiredNode.getLeftChild and RightChild are null
-        // Implement me!
-        if(findNode(nodeLabel)){
-            if (desiredNode.getLeftChild() != null && desiredNode.getRightChild() != null) {
-                String leftChild = desiredNode.getLeftChild().getVertLabel().toString();
-                String rightChild = desiredNode.getRightChild().getVertLabel().toString();
-                
-                return nodeLabel.toString() + " " + leftChild + " " + rightChild;
-            }
-        }
-        return nodeLabel.toString();
+		//check if nodeLabel exists in Tree
+		if (findNode(nodeLabel)) {
+			//check if node has no children
+			if (foundNode.getLeftChild() != null && foundNode.getRightChild() != null) {
+				String left = foundNode.getLeftChild().getVertLabel().toString();
+				String right = foundNode.getRightChild().getVertLabel().toString();
+				return nodeLabel.toString() + " " + left + " " + right;
+ 			}						
+		}
+    	return nodeLabel.toString();
+    	
     } // end of findParent
 
+    
     @SuppressWarnings("unchecked")
-    @Override
+	@Override
     public void printInPreorder(PrintWriter writer) {
-        // Implement me!
+    	/*
+        1. Visit the root.
+        2. Traverse the left subtree
+        3. Traverse the right subtree
+        */
         Node start = rootNode;
+        counter = 0;
+        tempArray = (T[]) new Object[size];
 
-        if (rootNode == null || rootNode == (T)EMPTY_NODE){
-            return;
+        // check if Tree is empty (no root node)
+        if(rootNode != null) {
+        	// run preOrder recursive algorithm starting from rootNode (start)
+            preOrder(start);
         }
-
-        preOrder(start);
-
-
+        
+        // iterate through tempArray and print nodes in Preorder
+        for (int i=0; i < size; i++) {
+            if (tempArray[i] == null){
+                break;
+            } else{
+                writer.print(tempArray[i].toString() + " ");
+            }
+        }
+        writer.println();
+        
+        
+    	
     } // end of printInPreorder
 
     public void preOrder(Node node){
+    	Node left = node.getLeftChild();
+    	Node right = node.getRightChild();
+    	
+    	tempArray[counter] = node.getVertLabel();
+        counter ++;
+    	
+    	if (right == null && left == null) {
+    		return;
+    	}
+    	
+    	if (left != null) {
+    		preOrder(left);
+    	}
 
+    	if (right != null) {
+    		preOrder(right);
+    	}
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public void printInInorder(PrintWriter writer) {
-        // Implement me!
+    	/*
+        1. Traverse the left subtree
+        2. Visit the root.
+        3. Traverse the right subtree
+        */
+    	Node start = rootNode;
+        counter = 0;
+        tempArray = (T[]) new Object[size];
+
+        // check if Tree is empty (no root node)
+        if(rootNode != null) {
+        	// run inOrder recursive algorithm starting from rootNode (start)
+            inOrder(start);
+        }
+        
+        // iterate through tempArray and print nodes in Inorder
+        for (int i=0; i < size; i++) {
+            if (tempArray[i] == null){
+                break;
+            } else{
+                writer.print(tempArray[i].toString() + " ");
+            }
+        }
+        writer.println();
     } // end of printInInorder
-
-    @Override
-    public void printInPostorder(PrintWriter writer) {
-        // Implement me!
-    } // end of printInPostorder
-
-
-    protected class Node{
+    
+    public void inOrder(Node node){
+    	Node left = node.getLeftChild();
+    	Node right = node.getRightChild();
     	
+    	//check left
+    	if (left != null) {
+    		inOrder(left);
+    	}
+    	// visit root
+    	tempArray[counter] = node.getVertLabel();
+        counter ++;
+
+        // check right
+    	if (right != null) {
+    		inOrder(right);
+    	}
+    } // end of inOrder
+
+    @SuppressWarnings("unchecked")
+	@Override
+    public void printInPostorder(PrintWriter writer) {
+    	/*
+        1. Traverse the left subtree
+        2. Traverse the right subtree
+        3. Visit the root.
+        */
+    	Node start = rootNode;
+        counter = 0;
+        tempArray = (T[]) new Object[size];
+
+        // check if Tree is empty (no root node)
+        if(rootNode != null) {
+        	// run postOrder recursive algorithm starting from rootNode (start)
+            postOrder(start);
+        }
+        
+        // iterate through tempArray and print nodes in Postorder
+        for (int i=0; i < size; i++) {
+            if (tempArray[i] == null){
+                break;
+            } else{
+                writer.print(tempArray[i].toString() + " ");
+            }
+        }
+        writer.println();
+        
+    } // end of printInPostorder
+    
+    public void postOrder(Node node){
+    	Node left = node.getLeftChild();
+    	Node right = node.getRightChild();
+    	
+    	// check left
+    	if (left != null) {
+    		postOrder(left);
+    	}
+
+        // check right
+    	if (right != null) {
+    		postOrder(right);
+    	}
+
+    	// visit root
+    	tempArray[counter] = node.getVertLabel();
+        counter ++;
+    } // end of postOrder
+
+
+    
+    
+    protected class Node{
         protected T vertLabel;
         protected Node rightChild, leftChild;
-        protected Node parent;
 
-
-        protected Node(T vertLabel, Node parent) {
+        protected Node(T vertLabel) {
             this.vertLabel = vertLabel;
             this.leftChild = null;
             this.rightChild = null;
-            this.parent = parent;
         }
 
         public T getVertLabel() {
@@ -197,10 +336,6 @@ public class LinkedRepresentation<T> implements BSPTree<T> {
             this.leftChild = leftChild;
         }
         
-        public Node getParent() {
-        	return parent;
-        }
-
-    }
-
+    } // end of class Node
+    
 } // end of class LinkedRepresentation
