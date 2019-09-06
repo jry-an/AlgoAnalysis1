@@ -30,7 +30,6 @@ public class LinkedRepresentation<T> implements BSPTree<T> {
     	if (rootNode == null) {
     		rootNode = new Node(nodeLabel);
     		size+=1;
-            System.err.println(rootNode.getVertLabel());
     	}
         
     } // end of setRootNode()

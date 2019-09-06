@@ -36,12 +36,6 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
     public void setRootNode(T nodeLabel) {
         if (binaryTreeArray[0] == null){
             binaryTreeArray [0] = nodeLabel;
-            System.err.println("Root = " + binaryTreeArray[0].toString());
-            if (binaryTreeArray[0] == null){
-                System.err.println("Root node null!");
-            }
-        } else {
-            System.out.println("Root already set");
         }
 
     } // end of setRootNode()
@@ -63,26 +57,15 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         	   T[] newArray = dynamicArray(binaryTreeArray, (binaryTreeArray.length*2+1)*2+1);
         	   binaryTreeArray = newArray;
            }
-           System.err.println(nodePos);
            if (leftChild == null){
-               System.err.println("Left child of " + srcLabel + " is null");
                leftChild = (T) EMPTY_NODE;
            }
            if (rightChild == null){
-               System.err.println("Right child of " + srcLabel + " is null");
                rightChild = (T) EMPTY_NODE;
            }
            binaryTreeArray[2 * nodePos + 1] = leftChild;
-           System.err.println(2 * nodePos + 1);
 
            binaryTreeArray[2 * nodePos + 2] = rightChild;
-            System.err.println(2 * nodePos + 2);
-
-
-            System.err.println("Left: " +binaryTreeArray[2 * nodePos + 1].toString() + " Right = " + binaryTreeArray[2 * nodePos + 2].toString());
-        }
-        else {
-            System.err.println("Node to split not found ");
         }
         
 
@@ -90,9 +73,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
 
     @Override
     public boolean findNode(T nodeLabel) {
-        System.err.println("find node: " + nodeLabel );
         for (int i = 0; i < binaryTreeArray.length; i++) {
-            //System.err.println(binaryTreeArray[i]);
             if (binaryTreeArray[i] != null) {
                 if (binaryTreeArray[i].toString().equals(nodeLabel.toString())) {
                     return true;
@@ -128,7 +109,6 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
        int right = 2 * nodePos + 2;
        
        if (nodePos < 0 || nodePos>=binaryTreeArray.length) {
-           System.err.println("No node found");
            return null;
        
        } else if (nodePos<binaryTreeArray.length/2){
@@ -170,13 +150,11 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
             if (tempArray[i] == null){
                 break;
             } else{
-                System.err.print(tempArray[i] + " ");
                 writer.print(tempArray[i].toString() + " ");
             }
 
         }
         writer.println();
-        System.out.println();
 
 
     } // end of printInPreorder
@@ -237,13 +215,11 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
             if (tempArray[i] == null){
                 break;
             } else{
-                System.err.print(tempArray[i] + " ");
                 writer.print(tempArray[i].toString() + " ");
             }
 
         }
         writer.println();
-        System.out.println();
 
 
     } // end of printInPreorder
@@ -305,13 +281,11 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
             if (tempArray[i] == null){
                 break;
             } else{
-                System.err.print(tempArray[i] + " ");
                 writer.print(tempArray[i].toString() + " ");
             }
 
         }
         writer.println();
-        System.out.println();
 
 
     } // end of printInPreorder
