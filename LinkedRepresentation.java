@@ -9,7 +9,7 @@ import java.io.PrintWriter;
  * @author Jeffrey Chan, 2016. 
  * @author Yongli Ren, 2019.
  */
-public class LinkedRepresentation < T > implements BSPTree < T > {
+public class LinkedRepresentation <T> implements BSPTree <T> {
 
     private Node foundNode;
     private String nodeParent;
@@ -186,14 +186,17 @@ public class LinkedRepresentation < T > implements BSPTree < T > {
         tempArray[counter] = node.getVertLabel();
         counter++;
 
+        //check if children exist
         if (right == null && left == null) {
             return;
         }
 
+        //check left tree
         if (left != null) {
             preOrder(left);
         }
 
+        //check right tree
         if (right != null) {
             preOrder(right);
         }
