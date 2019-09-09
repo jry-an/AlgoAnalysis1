@@ -38,7 +38,7 @@ public class LinkedRepresentation < T > implements BSPTree < T > {
         if (findNode(srcLabel)) {
             //check if left and right child nodes are not already set
             if (foundNode.getLeftChild() == null && foundNode.getRightChild() == null) {
-                //check if left and right childs passed through function are not null
+                //check if left and right child's passed through function are not null
                 if (leftChild != null && rightChild != null) {
                     //if all true, set the foundNode's children to new Nodes
                     foundNode.setLeftChild(new Node(leftChild));
@@ -76,14 +76,16 @@ public class LinkedRepresentation < T > implements BSPTree < T > {
             Node left = temp.getLeftChild();
             Node right = temp.getRightChild();
 
+            //check if left/right are null
             if (right == null && left == null) {
                 return;
             }
-
+            //check left tree
             if (left != null) {
                 recFindNode(left, goal);
             }
 
+            //check right tree
             if (right != null) {
                 recFindNode(right, goal);
             }
