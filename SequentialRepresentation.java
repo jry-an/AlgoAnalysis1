@@ -323,7 +323,6 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         return -1;
     }
 
-
     //updates the array size/dynamic array implementation
     @SuppressWarnings("unchecked")
     private T[] dynamicArray(T[] array, int newSize){
