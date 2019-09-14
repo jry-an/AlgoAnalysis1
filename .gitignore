@@ -25,3 +25,5 @@ chrome-user-data
 *.class
 *.classpath
 *.project
+*.png
+*.out

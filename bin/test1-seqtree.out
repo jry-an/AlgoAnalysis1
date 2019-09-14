@@ -1,6 +1,20 @@
+splitNode duration: 13977.0
+splitNode duration (ms): 0.013977
+splitNode duration: 7752.0
+splitNode duration (ms): 0.007752
+splitNode duration: 2269.0
+splitNode duration (ms): 0.002269
 true
+findNode duration: 26890.0
+findNode duration (ms): 0.02689
 F C
+findParent duration: 1.500478E7
+findParent duration (ms): 15.00478
 C F G
+findChildren duration: 3.0054703E7
+findChildren duration (ms): 30.054703
 A B D E C F G 
+Traverse PreOrder duration: 399351.0
+Traverse PreOrder duration (ms): 0.399351
 D B E A F C G 
 D E B F G C A 

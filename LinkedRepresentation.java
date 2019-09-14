@@ -34,32 +34,39 @@ public class LinkedRepresentation <T> implements BSPTree <T> {
 
     @Override
     public void splitNode(T srcLabel, T leftChild, T rightChild) {
-        //check if srcLabel exists in tree
-        if (findNode(srcLabel)) {
-            //check if left and right child nodes are not already set
-            if (foundNode.getLeftChild() == null && foundNode.getRightChild() == null) {
-                //check if left and right child's passed through function are not null
-                if (leftChild != null && rightChild != null) {
-                    //if all true, set the foundNode's children to new Nodes
-                    foundNode.setLeftChild(new Node(leftChild));
-                    foundNode.setRightChild(new Node(rightChild));
-                    size += 2;
+    	//check if rootnode is not null
+    	if (rootNode!=null) {
+    		//check if srcLabel exists in tree
+            if (findNode(srcLabel)) {
+                //check if left and right child nodes are not already set
+                if (foundNode.getLeftChild() == null && foundNode.getRightChild() == null) {
+                    //check if left and right child's passed through function are not null
+                    if (leftChild != null && rightChild != null) {
+                        //if all true, set the foundNode's children to new Nodes
+                        foundNode.setLeftChild(new Node(leftChild));
+                        foundNode.setRightChild(new Node(rightChild));
+                        size += 2;
+                    }
                 }
             }
-        }
+    	}
     } // end of splitNode
 
     @Override
     public boolean findNode(T nodeLabel) {
+    	//check if rootnode is not null
+    	if (rootNode!=null) {
         //traverses the tree then sets foundNode equal to the Node found.
-        Node start = rootNode;
-        if (nodeLabel != null) {
-            String goal = nodeLabel.toString();
-            foundNode = null;
-            isFound = false;
-            recFindNode(start, goal);
-        }
-        return isFound;
+	        Node start = rootNode;
+	        if (nodeLabel != null) {
+	            String goal = nodeLabel.toString();
+	            foundNode = null;
+	            isFound = false;
+	            recFindNode(start, goal);
+	            return isFound;
+	        }
+	    }
+    	return isFound;
     } // end of findNode
 
     private void recFindNode(Node temp, String goal) {

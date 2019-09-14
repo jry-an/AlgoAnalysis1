@@ -31,17 +31,14 @@ public class DataGeneration
         File file = new File("datagen/small.txt");
         FileWriter fr = new FileWriter(file, true);
         BufferedWriter br = new BufferedWriter(fr);
-        int gap = 1;
+        br.write("0 \n");
         // print out samples
-        for (int i = 0; i < small; i++) {
-            System.out.print(i + " ");
+        for (int i = 0; i < small; i+=2) {
             br.write(i + " ");
-            if (gap %3 == 0){
-                System.out.print("\n");
-                br.write("\n");
-                i = i-2;
-            }
-            gap = gap+1;
+            br.write((i+1) + " ");
+            br.write((i+2) + " ");
+            br.write("\n");
+
         }
         br.close();
         fr.close();
@@ -51,17 +48,14 @@ public class DataGeneration
         File file = new File("datagen/medium.txt");
         FileWriter fr = new FileWriter(file, true);
         BufferedWriter br = new BufferedWriter(fr);
-        int gap = 1;
+        br.write("0 \n");
         // print out samples
-        for (int i = 0; i < medium; i++) {
-            System.out.print(i + " ");
+        for (int i = 0; i < medium; i+=2) {
             br.write(i + " ");
-            if (gap %3 == 0){
-                System.out.print("\n");
-                br.write("\n");
-                i = i-2;
-            }
-            gap = gap+1;
+            br.write((i+1) + " ");
+            br.write((i+2) + " ");
+            br.write("\n");
+
         }
         br.close();
         fr.close();
@@ -71,18 +65,16 @@ public class DataGeneration
         File file = new File("datagen/large.txt");
         FileWriter fr = new FileWriter(file, true);
         BufferedWriter br = new BufferedWriter(fr);
-        int gap = 1;
+        
+        br.write("0 \n");
         // print out samples
-            for (int i = 69124; i < large; i++) {
-                System.out.print(i + " ");
-                br.write(i + " ");
-                if (gap %3 == 0){
-                    System.out.print("\n");
-                    br.write("\n");
-                    i = i-2;
-                }
-                gap = gap+1;
-            }
+        for (int i = 0; i < large; i+=2) {
+            br.write(i + " ");
+            br.write((i+1) + " ");
+            br.write((i+2) + " ");
+            br.write("\n");
+
+        }
         br.close();
         fr.close();
     } // end of sampleWithReplacement()
