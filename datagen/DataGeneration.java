@@ -1,15 +1,9 @@
 package datagen;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-/**
- * Generates collection of integers from sampling a uniform distribution.
- *
- * @author jkcchan
- */
 public class DataGeneration
 {
     private static final int small = 10;
@@ -83,20 +77,13 @@ public class DataGeneration
         fr.close();
     } // end of sampleWithReplacement()
 
-
-
-    /**
-     * Error message.
-     */
+    
     private static void usage() {
         System.err.println("invalid input");
         System.exit(1);
     } // end of usage()
 
 
-    /**
-     * Main method.
-     */
     public static void main(String[] args) {
         try {
             // sample size
