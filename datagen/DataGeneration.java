@@ -8,9 +8,9 @@ public class DataGeneration
 {
     /*
     Data sizes:
-    Small:  10^1
-    Medium: 10^3
-    Large:  10^5
+    Small:  2 * 10^1
+    Medium: 2* 10^3
+    Large:  2* 10^5
      */
 
     private static final int small = 10;
