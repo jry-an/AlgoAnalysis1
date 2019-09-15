@@ -19,12 +19,12 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
     python assign1TestScript.py -v ../AlgoAnal1  seqtree tests/test1.in
     */
 
-    protected T[] binaryTreeArray;
-    protected T[] tempArray;
-    protected int counter;
+    private T[] binaryTreeArray;
+    private T[] tempArray;
+    private int counter;
 
     @SuppressWarnings("unchecked")
-    public SequentialRepresentation() {
+    SequentialRepresentation() {
         binaryTreeArray = (T[]) new Object[3];
     } // end of SequentialRepresentation()
 
@@ -143,7 +143,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
 
     } // end of printInPreorder
 
-    public void preOrder(int index) {
+    private void preOrder(int index) {
         if (binaryTreeArray[index] != null) {
             tempArray[counter] = binaryTreeArray[index];
             counter ++;
@@ -210,7 +210,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
 
     } // end of printInPreorder
 
-    public void inOrder(int index) {
+    private void inOrder(int index) {
         if (binaryTreeArray[index] != null) {
             int leftNodeIndex = 2 * index + 1;
 
@@ -278,7 +278,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
 
     } // end of printInPreorder
 
-    public void postOrder(int index) {
+    private void postOrder(int index) {
         if (binaryTreeArray[index] != null) {
 
 

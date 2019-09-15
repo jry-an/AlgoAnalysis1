@@ -14,12 +14,12 @@ public class LinkedRepresentation <T> implements BSPTree <T> {
     private Node foundNode;
     private String nodeParent;
     private boolean isFound;
-    protected Node rootNode;
-    protected int size;
+    private Node rootNode;
+    private int size;
     private int counter;
     private T[] tempArray;
 
-    public LinkedRepresentation() {
+    LinkedRepresentation() {
         rootNode = null;
         size = 0;
     } // end of LinkedRepresentation()
@@ -191,7 +191,7 @@ public class LinkedRepresentation <T> implements BSPTree <T> {
 
 
     } // end of printInPreorder
-    public void preOrder(Node node) {
+    private void preOrder(Node node) {
         Node left = node.getLeftChild();
         Node right = node.getRightChild();
 
@@ -242,7 +242,7 @@ public class LinkedRepresentation <T> implements BSPTree <T> {
         writer.println();
     } // end of printInInorder
 
-    public void inOrder(Node node) {
+    private void inOrder(Node node) {
         Node left = node.getLeftChild();
         Node right = node.getRightChild();
         //check left
@@ -287,7 +287,7 @@ public class LinkedRepresentation <T> implements BSPTree <T> {
         writer.println();
     } // end of printInPostorder
 
-    public void postOrder(Node node) {
+    private void postOrder(Node node) {
         Node left = node.getLeftChild();
         Node right = node.getRightChild();
 
@@ -308,36 +308,32 @@ public class LinkedRepresentation <T> implements BSPTree <T> {
 
 
     protected class Node {
-        protected T vertLabel;
-        protected Node rightChild, leftChild;
+        T vertLabel;
+        Node rightChild, leftChild;
 
-        protected Node(T vertLabel) {
+        Node(T vertLabel) {
             this.vertLabel = vertLabel;
             this.leftChild = null;
             this.rightChild = null;
         }
 
-        public T getVertLabel() {
+        T getVertLabel() {
             return vertLabel;
         }
 
-        public void setVertLabel(T vertLabel) {
-            this.vertLabel = vertLabel;
-        }
-
-        public Node getRightChild() {
+        Node getRightChild() {
             return rightChild;
         }
 
-        public void setRightChild(Node rightChild) {
+        void setRightChild(Node rightChild) {
             this.rightChild = rightChild;
         }
 
-        public Node getLeftChild() {
+        Node getLeftChild() {
             return leftChild;
         }
 
-        public void setLeftChild(Node leftChild) {
+        void setLeftChild(Node leftChild) {
             this.leftChild = leftChild;
         }
 

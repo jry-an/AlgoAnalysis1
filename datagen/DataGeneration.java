@@ -6,6 +6,13 @@ import java.io.IOException;
 
 public class DataGeneration
 {
+    /*
+    Data sizes:
+    Small:  10^1
+    Medium: 10^3
+    Large:  10^5
+     */
+
     private static final int small = 10;
     private static  final int medium = ((int) Math.pow(10,3));
     private static final int large = ((int) Math.pow(10,5));
@@ -13,71 +20,76 @@ public class DataGeneration
     private DataGeneration()  {
     }
 
+    //print small dataset to file small.txt
     private void small() throws IOException {
         File file = new File("datagen/small.txt");
         FileWriter fr = new FileWriter(file, true);
         BufferedWriter br = new BufferedWriter(fr);
+        //print root node
         br.write("0 \n");
         // print out samples
-        int second = 1;
-        int third = 2;
+        int leftChild = 1;
+        int rightChild = 2;
         for (int i = 0; i < small; i++) {
             br.write(i + " ");
-            br.write((second) + " ");
-            br.write((third) + " ");
+            br.write((leftChild) + " ");
+            br.write((rightChild) + " ");
             br.write("\n");
-            second = second + 2;
-            third = third + 2;
+            leftChild = leftChild + 2;
+            rightChild = rightChild + 2;
 
         }
         br.close();
         fr.close();
     } // end of sampleWithReplacement()
 
+    //print medium dataset to file medium.txt
     private void medium() throws IOException {
         File file = new File("datagen/medium.txt");
         FileWriter fr = new FileWriter(file, true);
         BufferedWriter br = new BufferedWriter(fr);
+        //print root node
         br.write("0 \n");
         // print out samples
-        int second = 1;
-        int third = 2;
+        int leftChild = 1;
+        int rightChild = 2;
         for (int i = 0; i < medium; i++) {
             br.write(i + " ");
-            br.write((second) + " ");
-            br.write((third) + " ");
+            br.write((leftChild) + " ");
+            br.write((rightChild) + " ");
             br.write("\n");
-            second = second + 2;
-            third = third + 2;
+            leftChild = leftChild + 2;
+            rightChild = rightChild + 2;
 
         }
         br.close();
         fr.close();
     } // end of sampleWithReplacement()
 
+    //print large dataset to file large.txt
     private void large() throws IOException {
         File file = new File("datagen/large.txt");
         FileWriter fr = new FileWriter(file, true);
         BufferedWriter br = new BufferedWriter(fr);
-        
+        //print root node
         br.write("0 \n");
         // print out samples
-        int second = 1;
-        int third = 2;
+        int leftChild = 1;
+        int rightChild = 2;
         for (int i = 0; i < large; i++) {
             br.write(i + " ");
-            br.write((second) + " ");
-            br.write((third) + " ");
+            br.write((leftChild) + " ");
+            br.write((rightChild) + " ");
             br.write("\n");
-            second = second + 2;
-            third = third + 2;
+            leftChild = leftChild + 2;
+            rightChild = rightChild + 2;
 
         }
         br.close();
         fr.close();
     } // end of sampleWithReplacement()
 
-    
+
     private static void usage() {
         System.err.println("invalid input");
         System.exit(1);
@@ -86,12 +98,12 @@ public class DataGeneration
 
     public static void main(String[] args) {
         try {
-            // sample size
-            String samplingType = args[0];
+            // data size
+            String dataSize = args[0];
 
             DataGeneration gen = new DataGeneration();
 
-            switch (samplingType) {
+            switch (dataSize) {
                 case "small":
                     gen.small();
                     break;
@@ -102,7 +114,7 @@ public class DataGeneration
                     gen.large();
                     break;
                 default:
-                    System.err.println(samplingType + " unknown size.");
+                    System.err.println(dataSize + " is an illegal size. Options are 'small', 'medium' and 'large'");
             }
         }
         catch (Exception e) {
