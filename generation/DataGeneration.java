@@ -1,4 +1,4 @@
-package datagen;
+package generation;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -22,7 +22,7 @@ public class DataGeneration
 
     //print small dataset to file small.txt
     private void small() throws IOException {
-        File file = new File("datagen/small.txt");
+        File file = new File("generation/small.txt");
         FileWriter fr = new FileWriter(file, true);
         BufferedWriter br = new BufferedWriter(fr);
         //print root node
@@ -45,7 +45,7 @@ public class DataGeneration
 
     //print medium dataset to file medium.txt
     private void medium() throws IOException {
-        File file = new File("datagen/medium.txt");
+        File file = new File("generation/medium.txt");
         FileWriter fr = new FileWriter(file, true);
         BufferedWriter br = new BufferedWriter(fr);
         //print root node
@@ -68,7 +68,7 @@ public class DataGeneration
 
     //print large dataset to file large.txt
     private void large() throws IOException {
-        File file = new File("datagen/large.txt");
+        File file = new File("generation/large.txt");
         FileWriter fr = new FileWriter(file, true);
         BufferedWriter br = new BufferedWriter(fr);
         //print root node

@@ -99,9 +99,11 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         int left = 2 * nodePos + 1;
         int right = 2 * nodePos + 2;
 
+        //check if in bounds of array
         if (nodePos < 0 || nodePos>=binaryTreeArray.length) {
             return null;
 
+            //return children
         } else if (nodePos<binaryTreeArray.length/2){
             if (binaryTreeArray[left] != null && binaryTreeArray[right] != null) {
                 return (nodeLabel + " " + binaryTreeArray[left] + " " + binaryTreeArray[right]);

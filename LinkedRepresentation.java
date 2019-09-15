@@ -85,6 +85,7 @@ public class LinkedRepresentation <T> implements BSPTree <T> {
     private void recFindNode(Node temp, String goal) {
         String tempLabel;
         //check base case (rootNode = goal)
+        //if temp equals goal return found
         tempLabel = temp.getVertLabel().toString();
         if (tempLabel.equals(goal)) {
             isFound = true;
