@@ -30,6 +30,9 @@ public class LinkedRepresentation <T> implements BSPTree <T> {
             rootNode = new Node(nodeLabel);
             size += 1;
         }
+        if (nodeLabel == null){
+            System.err.println("Root node cannot be set to null");
+        }
     } // end of setRootNode()
 
     @Override
@@ -47,13 +50,16 @@ public class LinkedRepresentation <T> implements BSPTree <T> {
                         foundNode.setRightChild(new Node(rightChild));
                         size += 2;
                     }
+                    else{
+                        System.err.println("A child node cannot be null!");
+                    }
                 }
             }
             else{
-                System.out.println("can't find node");
+                System.err.println("Couldn't find node " + srcLabel.toString());
             }
     	} else{
-    	    System.err.println("Root == null");
+    	    System.err.println("Root node not set! Please set a root node.");
         }
     } // end of splitNode
 
@@ -70,7 +76,9 @@ public class LinkedRepresentation <T> implements BSPTree <T> {
 	            recFindNode(start, goal);
 	            return isFound;
 	        }
-	    }
+	    } else{
+            System.err.println("Root node not set! Please set a root node.");
+        }
     	return isFound;
     } // end of findNode
 

@@ -14,11 +14,6 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
      * Constructs empty graph.
      */
 
-    /*
-    javac -cp .:jopt-simple-5.0.2.jar:sample.jar *.java
-    python assign1TestScript.py -v ../AlgoAnal1  seqtree tests/test1.in
-    */
-
     private T[] binaryTreeArray;
     private T[] tempArray;
     private int counter;
@@ -32,6 +27,9 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
     public void setRootNode(T nodeLabel) {
         if (binaryTreeArray[0] == null){
             binaryTreeArray [0] = nodeLabel;
+        }
+        if(nodeLabel == null){
+            System.err.println("Root can't be null! Please set an actual node as root");
         }
 
     } // end of setRootNode()
@@ -51,9 +49,11 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
             //if nodeLabel null, nodeLabel is set to empty node
             if (leftChild == null){
                 leftChild = (T) EMPTY_NODE;
+                System.err.println("Left child was null, left child of " + srcLabel.toString() + " set as an empty node");
             }
             if (rightChild == null){
                 rightChild = (T) EMPTY_NODE;
+                System.err.println("Left child was null, right child of " + srcLabel.toString() + " set as an empty node");
             }
             binaryTreeArray[2 * nodePos + 1] = leftChild;
             binaryTreeArray[2 * nodePos + 2] = rightChild;

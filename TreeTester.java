@@ -81,61 +81,31 @@ public class TreeTester {
                     // set root node
                     case "RN":
                         verifyTokens(tokens, 2);
-                        tree.setRootNode(tokens[1]); //call function
+                        tree.setRootNode(tokens[1]);
                         break;
                     // split node
                     case "SP":
                         verifyTokens(tokens, 4);
-                        double startTime = System.nanoTime(); // start time
-                        tree.splitNode(tokens[1], tokens[2], tokens[3]); //call function
-                        double endTime = System.nanoTime(); // end time
-                        double duration = (endTime - startTime); 
-                        double durationInMili = duration/1000000;
-                        writer.println("splitNode duration: " + duration);
-                        writer.println("splitNode duration (ms): " + durationInMili);
+                        tree.splitNode(tokens[1], tokens[2], tokens[3]);
                         break;
                     // find node
                     case "FN":
                         verifyTokens(tokens, 2);
-                        startTime = System.nanoTime(); // start time
-                        writer.println(tree.findNode(tokens[1])); //call function
-                        endTime = System.nanoTime(); // end time
-                        duration = (endTime - startTime); 
-                        durationInMili = duration/1000000;
-                        writer.println("findNode duration: " + duration);
-                        writer.println("findNode duration (ms): " + durationInMili);
+                        writer.println(tree.findNode(tokens[1]));
                         break;
                     // find parent node
                     case "FP":
                         verifyTokens(tokens, 2);
-                        startTime = System.nanoTime(); // start time
-                        writer.println(tree.findParent(tokens[1])); //call function
-                        endTime = System.nanoTime(); // end time
-                        duration = (endTime - startTime); 
-                        durationInMili = duration/1000000;
-                        writer.println("findParent duration: " + duration);
-                        writer.println("findParent duration (ms): " + durationInMili);
+                        writer.println(tree.findParent(tokens[1]));
                         break;
                     // find children nodes
                     case "FC":
                         verifyTokens(tokens, 2);
-                        startTime = System.nanoTime(); // start time
-                        writer.println(tree.findChildren(tokens[1])); //call function
-                        endTime = System.nanoTime(); // end time
-                        duration = (endTime - startTime); 
-                        durationInMili = duration/1000000;
-                        writer.println("findChildren duration: " + duration);
-                        writer.println("findChildren duration (ms): " + durationInMili);
+                        writer.println(tree.findChildren(tokens[1]));
                         break;
                     // print all the nodes in the "preorder" traversal
                     case "TP":
-						startTime = System.nanoTime(); // start time
-                        tree.printInPreorder(writer); //call function
-						endTime = System.nanoTime(); // end time
-						duration = (endTime - startTime); 
-						durationInMili = duration/1000000;
-						writer.println("Traverse PreOrder duration: " + duration);
-						writer.println("Traverse PreOrder duration (ms): " + durationInMili);
+                        tree.printInPreorder(writer);
                         break;
                     // print all the nodes in the "inorder" traversal
                     case "TI":
@@ -230,7 +200,6 @@ public class TreeTester {
             case LINKED_TREE:
                 tree = new LinkedRepresentation<>();
                 break;
-
             default:
                 System.err.println("Unknown implementation type.");
                 usage();
@@ -260,7 +229,6 @@ public class TreeTester {
                     rightChild = tokens[2];
                     tree.splitNode(srcLabel, leftChild, rightChild);
                 }
-                System.out.println("Tree loaded! You can now use functions");
             } catch (FileNotFoundException ex) {
                 System.err.println("File " + args[2] + " not found.");
             } catch (IOException ex) {
@@ -280,6 +248,77 @@ public class TreeTester {
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
+
     } // end of main()
 
 } // end of class TreeTester
+
+/*
+THIS WAS THE CODE WE USED TO GET THE TIME IN ms FOR EACH FUNCTION
+
+ // set root node
+                    case "RN":
+                        verifyTokens(tokens, 2);
+                        tree.setRootNode(tokens[1]); //call function
+                        tree.setRootNode(tokens[1]);
+                        break;
+                    // split node
+                    case "SP":
+                        verifyTokens(tokens, 4);
+                        double startTime = System.nanoTime(); // start time
+                        tree.splitNode(tokens[1], tokens[2], tokens[3]); //call function
+                        double endTime = System.nanoTime(); // end time
+                        double duration = (endTime - startTime);
+                        double durationInMili = duration/1000000;
+                        writer.println("splitNode duration: " + duration);
+                        writer.println("splitNode duration (ms): " + durationInMili);
+                        tree.splitNode(tokens[1], tokens[2], tokens[3]);
+                        break;
+                    // find node
+                    case "FN":
+                        verifyTokens(tokens, 2);
+                        startTime = System.nanoTime(); // start time
+                        writer.println(tree.findNode(tokens[1])); //call function
+                        endTime = System.nanoTime(); // end time
+                        duration = (endTime - startTime);
+                        durationInMili = duration/1000000;
+                        writer.println("findNode duration: " + duration);
+                        writer.println("findNode duration (ms): " + durationInMili);
+                        writer.println(tree.findNode(tokens[1]));
+                        break;
+                    // find parent node
+                    case "FP":
+                        verifyTokens(tokens, 2);
+                        startTime = System.nanoTime(); // start time
+                        writer.println(tree.findParent(tokens[1])); //call function
+                        endTime = System.nanoTime(); // end time
+                        duration = (endTime - startTime);
+                        durationInMili = duration/1000000;
+                        writer.println("findParent duration: " + duration);
+                        writer.println("findParent duration (ms): " + durationInMili);
+                        writer.println(tree.findParent(tokens[1]));
+                        break;
+                    // find children nodes
+                    case "FC":
+                        verifyTokens(tokens, 2);
+                        startTime = System.nanoTime(); // start time
+                        writer.println(tree.findChildren(tokens[1])); //call function
+                        endTime = System.nanoTime(); // end time
+                        duration = (endTime - startTime);
+                        durationInMili = duration/1000000;
+                        writer.println("findChildren duration: " + duration);
+                        writer.println("findChildren duration (ms): " + durationInMili);
+                        writer.println(tree.findChildren(tokens[1]));
+                        break;
+                    // print all the nodes in the "preorder" traversal
+                    case "TP":
+						startTime = System.nanoTime(); // start time
+                        tree.printInPreorder(writer); //call function
+						endTime = System.nanoTime(); // end time
+						duration = (endTime - startTime);
+						durationInMili = duration/1000000;
+						writer.println("Traverse PreOrder duration: " + duration);
+						writer.println("Traverse PreOrder duration (ms): " + durationInMili);
+                        tree.printInPreorder(writer);
+                        break;
+ */
