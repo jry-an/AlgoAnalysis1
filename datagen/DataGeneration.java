@@ -41,7 +41,7 @@ public class DataGeneration
         }
         br.close();
         fr.close();
-    } // end of sampleWithReplacement()
+    }
 
     //print medium dataset to file medium.txt
     private void medium() throws IOException {
@@ -64,7 +64,7 @@ public class DataGeneration
         }
         br.close();
         fr.close();
-    } // end of sampleWithReplacement()
+    }
 
     //print large dataset to file large.txt
     private void large() throws IOException {
@@ -87,7 +87,7 @@ public class DataGeneration
         }
         br.close();
         fr.close();
-    } // end of sampleWithReplacement()
+    }
 
 
     private static void usage() {
@@ -123,4 +123,4 @@ public class DataGeneration
         }
 
     } // end of main()
-} // end of class DataGenerator
+} // end of class DataGeneration
