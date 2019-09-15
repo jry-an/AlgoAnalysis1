@@ -12,20 +12,12 @@ import java.io.IOException;
  */
 public class DataGeneration
 {
-    /** Program name. */
-    protected static final String progName = "DataGenerator";
-
-    /** size of integer range to generate values from. */
-    protected int range;
-
-    static final int small = 10;
-   static  final int medium = ((int) Math.pow(10,3));
-   static final int large = ((int) Math.pow(10,5));
+    private static final int small = 10;
+    private static  final int medium = ((int) Math.pow(10,3));
+    private static final int large = ((int) Math.pow(10,5));
 
     private DataGeneration()  {
     }
-
-
 
     private void small() throws IOException {
         File file = new File("datagen/small.txt");
@@ -36,8 +28,6 @@ public class DataGeneration
         int second = 1;
         int third = 2;
         for (int i = 0; i < small; i++) {
-
-
             br.write(i + " ");
             br.write((second) + " ");
             br.write((third) + " ");
@@ -59,8 +49,6 @@ public class DataGeneration
         int second = 1;
         int third = 2;
         for (int i = 0; i < medium; i++) {
-
-
             br.write(i + " ");
             br.write((second) + " ");
             br.write((third) + " ");
@@ -83,8 +71,6 @@ public class DataGeneration
         int second = 1;
         int third = 2;
         for (int i = 0; i < large; i++) {
-
-
             br.write(i + " ");
             br.write((second) + " ");
             br.write((third) + " ");
@@ -119,11 +105,9 @@ public class DataGeneration
             DataGeneration gen = new DataGeneration();
 
             switch (samplingType) {
-                // sampling with replacement
                 case "small":
                     gen.small();
                     break;
-                // sampling without replacement
                 case "medium":
                     gen.medium();
                     break;
@@ -131,7 +115,7 @@ public class DataGeneration
                     gen.large();
                     break;
                 default:
-                    System.err.println(samplingType + " is an unknown sampling type.");
+                    System.err.println(samplingType + " unknown size.");
             }
         }
         catch (Exception e) {
