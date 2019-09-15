@@ -260,6 +260,7 @@ public class TreeTester {
                     rightChild = tokens[2];
                     tree.splitNode(srcLabel, leftChild, rightChild);
                 }
+                System.out.println("Tree loaded: ");
             } catch (FileNotFoundException ex) {
                 System.err.println("File " + args[2] + " not found.");
             } catch (IOException ex) {
