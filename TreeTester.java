@@ -230,9 +230,7 @@ public class TreeTester {
             case LINKED_TREE:
                 tree = new LinkedRepresentation<>();
                 break;
-            case SAMPLE:
-                tree = new SampleImplementation<>();
-                break;
+
             default:
                 System.err.println("Unknown implementation type.");
                 usage();
@@ -281,7 +279,6 @@ public class TreeTester {
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
-
     } // end of main()
 
 } // end of class TreeTester

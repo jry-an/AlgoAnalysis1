@@ -33,11 +33,17 @@ public class DataGeneration
         BufferedWriter br = new BufferedWriter(fr);
         br.write("0 \n");
         // print out samples
-        for (int i = 0; i < small; i+=2) {
+        int second = 1;
+        int third = 2;
+        for (int i = 0; i < small; i++) {
+
+
             br.write(i + " ");
-            br.write((i+1) + " ");
-            br.write((i+2) + " ");
+            br.write((second) + " ");
+            br.write((third) + " ");
             br.write("\n");
+            second = second + 2;
+            third = third + 2;
 
         }
         br.close();
@@ -50,11 +56,17 @@ public class DataGeneration
         BufferedWriter br = new BufferedWriter(fr);
         br.write("0 \n");
         // print out samples
-        for (int i = 0; i < medium; i+=2) {
+        int second = 1;
+        int third = 2;
+        for (int i = 0; i < medium; i++) {
+
+
             br.write(i + " ");
-            br.write((i+1) + " ");
-            br.write((i+2) + " ");
+            br.write((second) + " ");
+            br.write((third) + " ");
             br.write("\n");
+            second = second + 2;
+            third = third + 2;
 
         }
         br.close();
@@ -68,11 +80,17 @@ public class DataGeneration
         
         br.write("0 \n");
         // print out samples
-        for (int i = 0; i < large; i+=2) {
+        int second = 1;
+        int third = 2;
+        for (int i = 0; i < large; i++) {
+
+
             br.write(i + " ");
-            br.write((i+1) + " ");
-            br.write((i+2) + " ");
+            br.write((second) + " ");
+            br.write((third) + " ");
             br.write("\n");
+            second = second + 2;
+            third = third + 2;
 
         }
         br.close();

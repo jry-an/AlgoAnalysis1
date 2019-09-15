@@ -49,7 +49,12 @@ public class LinkedRepresentation <T> implements BSPTree <T> {
                     }
                 }
             }
-    	}
+            else{
+                System.out.println("can't find node");
+            }
+    	} else{
+    	    System.err.println("Root == null");
+        }
     } // end of splitNode
 
     @Override
